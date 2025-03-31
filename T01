@@ -54,6 +54,9 @@ int main(){
         clock_t tempof = clock();
         float tempo_tot = (float)(tempof - tempoini) / CLOCKS_PER_SEC;
         float sum += tempo_tot;
+
+// armazenar em um .txt pro grafico dps
+
         tempos[i] = tempo_tot;
         //acharv[i] = achado;
     }
