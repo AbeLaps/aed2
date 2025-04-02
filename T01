@@ -1,14 +1,10 @@
-/*
-listas
-vetor->buscas/sorts/criar
-rand() % 1000000
-*/
+
 
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 
-void preenche_vetor_aleatorio(int v[],int tam){
+void popula_vetor_aleatorio(int v[],int tam){
     int k;
     for(int i = 0; i < tam; i++){
         k = rand();
@@ -17,9 +13,7 @@ void preenche_vetor_aleatorio(int v[],int tam){
     return;
 }
 
-int busca_bin(int v[],int tam,int val){
-    return 0;
-}
+
 
 int busca_seq(int v[], int tam, int val){
     for(int i = 0;i < tam; i++){
@@ -39,6 +33,8 @@ int main(){
     float sum = 0;
     preenche_vetor_aleatorio(v,100000);
     /*questao01*/
+
+
     for(int i = 0;i < 30;i++){
         if(i < 15){
             n = rand();
@@ -60,7 +56,9 @@ int main(){
         //acharv[i] = achado;
     }
 
-    //printf("%f");
+
+//15x pega um numero aleatorio
+//15x pega um numero que tem no vetor
     for(int i = 0;i < 30;i++){
         if(i < 15){
             n = rand();
@@ -77,7 +75,4 @@ int main(){
         tempos[i] = tempo_tot;
         acharv[i] = achado;
     }
-
-    /*questao02*/
-
 }
