@@ -1,1 +1,45 @@
 
+
+
+
+
+for(int i = 0;i < 30;i++){
+        if(i < 15){
+            n = rand();
+            k=n;
+        }
+        else{
+            n = rand() % 1000000;
+            k=v[n];
+        }
+        clock_t tempoini = clock();
+        int achado = busca_bin(v,1000000,k);
+        clock_t tempof = clock();
+        float tempo_tot = (float)(tempof - tempoini) / CLOCKS_PER_SEC;
+        //float sum += tempo_tot;
+
+// armazenar em um .txt pro grafico dps
+
+        tempos[i] = tempo_tot;
+        //acharv[i] = achado;
+    }
+
+
+//15x pega um numero aleatorio
+//15x pega um numero que tem no vetor
+    for(int i = 0;i < 30;i++){
+        if(i < 15){
+            n = rand();
+            k=n;
+        }
+        else{
+            n = rand() % 1000000;
+            k=v[n];
+        }
+        clock_t tempoini = clock();
+        int achado = busca_seq(v,1000000,k);
+        clock_t tempof = clock();
+        float tempo_tot = (float)(tempof - tempoini) / CLOCKS_PER_SEC;
+        tempos[i] = tempo_tot;
+        acharv[i] = achado;
+    }
