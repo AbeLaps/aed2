@@ -1,0 +1,1 @@
+/*operacoes do vetor aqui */
