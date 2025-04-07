@@ -5,7 +5,7 @@
 typedef struct tipoVetor{
     unsigned int v[1000000];
     unsigned int tam;
-}tipoVetor
+}tipoVetor;
 
 void criaVetor(tipoVetor * v );
 
