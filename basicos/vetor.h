@@ -15,7 +15,6 @@ void preencheVetorOrdenado(tipoVetor v);
 
 void printaVetor(tipoVetor *v);
 
-
 int buscaSeq(tipoVetor v, int chave);
 
 int buscaBin(tipoVetor v, int chave);
@@ -29,6 +28,5 @@ void insertSort (tipoVetor * v);
 void bubbleSort (tipoVetor * v);
 
 void mergeSort ( tipoVetor * v);
-
 
 #endif
