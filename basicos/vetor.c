@@ -2,6 +2,7 @@
 #include <vetor.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void preencheVetor(tipoVetor *v){
     srand(time(NULL));
@@ -24,8 +25,88 @@ void preencheVetorOrdenado(tipoVetor *v){
         v->vet[i] = k1;
     }
 }
+void bubbleSort(tipoVetor *vet) {
+    unsigned n = vet->tam;
+
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (vet->vet[j] > vet->vet[j+1]){
+                int temp = vet->vet[j];
+                vet->vet[j] = vet->vet[j+1];
+                vet->vet[j+1] = temp;
+            }
+        }
+    }
+    return;
+}
+
+void selectionSort(tipoVetor *v){
+    unsigned n = v->tam;
+
+    for (int i = 0; i < n-1; i++) {
+        int min_idx = i;
+        for (int j = i+1; j < n; j++) {
+            if (v->vet[j] < v->vet[min_idx]) {
+                min_idx = j;
+            }
+        }
+        int temp = v->vet[i];
+        v->vet[i] = v->vet[min_idx];
+        v->vet[min_idx] = temp;
+    }
+    return;
+}
+
+void insertionSort(tipoVetor *v) {
+    unsigned n = v->tam;
+
+    for (int i = 1; i < n; i++) {
+        int chave = v->vet[i];
+        int j = i - 1;
+
+        while (j >= 0 && v->vet[j] > chave) {
+            v->vet[j + 1] = v->vet[j];
+            j--;
+        }
+        v->vet[j + 1] = chave;
+    }
+    return;
+}
 
 
+void quickSortR(tipoVetor *v, int ini, int fim){
+    int i = ini;
+    int f = fim;
+
+    int pivot = (i + f)/2;
+    int np = v->vet[pivot];
+    int temp;
+
+    if(i == f){return;}
+
+    while(i <= f){
+        while(v->vet[i] <= np){
+            i++;
+        }
+        while(v->vet[f] >= np){
+            f--;
+        }
+        if(i <= f){
+        temp = v->vet[i];
+        v->vet[i] = v->vet[f];
+        v->vet[f] = temp;
+        i++;
+        f--;
+        }
+    }
+    if (ini < f) quickSortR(v, ini, pivot);
+    if (i < fim) quickSortR(v, pivot,fim);
+    return;
+}
+void quickSort(tipoVetor *v){
+    quickSortR(v,0,v->tam/2);
+    quickSortR(v, v->tam/2 - 1, v->tam - 1);
+}
 
 void mergeSortR(tipoVetor *v, int aux[], int inicio, int fim) {
 
