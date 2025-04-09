@@ -4,6 +4,12 @@
 #include <stdlib.h>
 #include <time.h>
 
+
+typedef struct tipoVetor{
+    unsigned int vet[1000000];
+    unsigned int tam;
+}tipoVetor;
+
 void preencheVetor(tipoVetor *v){
     srand(time(NULL));
     unsigned tam = v->tam;
@@ -82,7 +88,7 @@ void quickSortR(tipoVetor *v, int ini, int fim){
     int np = v->vet[pivot];
     int temp;
 
-    if(i == f){return;}
+    if(i >= f){return;}
 
     while(i <= f){
         while(v->vet[i] <= np){
@@ -99,13 +105,12 @@ void quickSortR(tipoVetor *v, int ini, int fim){
         f--;
         }
     }
-    if (ini < f) quickSortR(v, ini, pivot);
-    if (i < fim) quickSortR(v, pivot,fim);
+    if (ini < f){ quickSortR(v, ini, f);}
+    if (i < fim){ quickSortR(v, i,fim);}
     return;
 }
 void quickSort(tipoVetor *v){
-    quickSortR(v,0,v->tam/2);
-    quickSortR(v, v->tam/2 - 1, v->tam - 1);
+    quickSortR(v,0,v->tam-1);
 }
 
 void mergeSortR(tipoVetor *v, int aux[], int inicio, int fim) {
@@ -120,13 +125,13 @@ void mergeSortR(tipoVetor *v, int aux[], int inicio, int fim) {
   
     a = inicio;  b = meio+1;   k = inicio;
     while((a <= meio) && (b<=fim)) {
-      if(v->v[a] < v->v[b]) {    aux[k] = v->v[a];      a++;    }
-      else            {    aux[k] = v->v[b];      b++;    }
+      if(v->vet[a] < v->vet[b]) {    aux[k] = v->vet[a];      a++;    }
+      else            {    aux[k] = v->vet[b];      b++;    }
       k++;
     }
-    while(a <= meio) {    aux[k] = v->v[a];    a++; k++;  }
-    while(b <= fim) {    aux[k] = v->v[b];    b++;    k++;  }
-    for(k = inicio; k <= fim; k++) { v->v[k] = aux[k]; }
+    while(a <= meio) {    aux[k] = v->vet[a];    a++; k++;  }
+    while(b <= fim) {    aux[k] = v->vet[b];    b++;    k++;  }
+    for(k = inicio; k <= fim; k++) { v->vet[k] = aux[k]; }
   }
 }
 
