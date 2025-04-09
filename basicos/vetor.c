@@ -31,15 +31,15 @@ void preencheVetorOrdenado(tipoVetor *v){
         v->vet[i] = k1;
     }
 }
-void bubbleSort(tipoVetor *vet) {
-    unsigned n = vet->tam;
+void bubbleSort(tipoVetor *v) {
+    unsigned n = v->tam;
 
     for (int i = 0; i < n-1; i++) {
         for (int j = 0; j < n-i-1; j++) {
-            if (vet->vet[j] > vet->vet[j+1]){
-                int temp = vet->vet[j];
-                vet->vet[j] = vet->vet[j+1];
-                vet->vet[j+1] = temp;
+            if (v->vet[j] > v->vet[j+1]){
+                int temp = v->vet[j];
+                v->vet[j] = v->vet[j+1];
+                v->vet[j+1] = temp;
             }
         }
     }
@@ -152,12 +152,12 @@ int buscaBin(tipoVetor *v, unsigned int x) {
         int meio = (inicio + fim) / 2;
 
         // Verifica o elemento do meio
-        if (v->v[meio] == x) {
+        if (v->vet[meio] == x) {
             return 1; // Retorna 1 se achar o valor
         }
 
         // Procura na direita
-        if (v->v[meio] < x) {
+        if (v->vet[meio] < x) {
             inicio = meio + 1;
         }
         // Procura na esquerda
@@ -172,7 +172,7 @@ int buscaBin(tipoVetor *v, unsigned int x) {
 
 int buscaSeqVetor(tipoVetor v, unsigned int val) {
     for (unsigned int i = 0; i < v.tam; i++) {
-        if (v.v[i] == val) {
+        if (v.vet[i] == val) {
             return 1;  // Retorna 1 se achar o valor
         }
     }
