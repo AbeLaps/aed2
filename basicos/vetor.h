@@ -15,9 +15,9 @@ void preencheVetorOrdenado(tipoVetor v);
 
 void printaVetor(tipoVetor *v);
 
-int buscaSeq(tipoVetor v, int chave);
+int buscaSeqVetor(tipoVetor v, unsigned int chave);
 
-int buscaBin(tipoVetor v, int chave);
+int buscaBin(tipoVetor v, unsigned int chave);
 
 void qSort (tipoVetor * v);
 
