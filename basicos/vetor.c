@@ -143,3 +143,38 @@ void mergeSort (tipoVetor *v) {
   mergeSortR(v, aux, 0, tam-1);
   free(aux);
 }
+
+int buscaBin(tipoVetor *v, unsigned int x) {
+    int inicio = 0;
+    int fim = v->tam - 1;
+
+    while (inicio <= fim) {
+        int meio = (inicio + fim) / 2;
+
+        // Verifica o elemento do meio
+        if (v->v[meio] == x) {
+            return 1; // Retorna 1 se achar o valor
+        }
+
+        // Procura na direita
+        if (v->v[meio] < x) {
+            inicio = meio + 1;
+        }
+        // Procura na esquerda
+        else {
+            fim = meio - 1;
+        }
+    }
+
+    // Retorna -1 caso o valor não seja encontrado
+    return -1;
+}
+
+int buscaSeqVetor(tipoVetor v, unsigned int val) {
+    for (unsigned int i = 0; i < v.tam; i++) {
+        if (v.v[i] == val) {
+            return 1;  // Retorna 1 se achar o valor
+        }
+    }
+    return -1;  // Retorna -1 caso o valor não seja encontrado
+}
