@@ -6,7 +6,7 @@ void criaLista (tipoLista *l){
 }
 
 
-int buscaSeqLista (tipolista *l, int key){
+int buscaSeqLista (tipoLista *l, int key){
     if(l->prim == NULL){
         return 0;
         }
