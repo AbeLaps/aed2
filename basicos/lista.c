@@ -2,7 +2,7 @@
 
 
 void criaLista (tipoLista *l){
-    tipoLista->prim = NULL;
+    l->prim = NULL;
 }
 
 
