@@ -13,6 +13,8 @@ void preencheVetor(tipoVetor v);
 
 void preencheVetorOrdenado(tipoVetor v);
 
+float calcularDPVetor(tipoVetor v);
+
 void printaVetor(tipoVetor *v);
 
 int buscaSeqVetor(tipoVetor v, unsigned int chave);
