@@ -33,6 +33,20 @@ void preencheVetorOrdenado(tipoVetor *v){
         v->vet[i] = k1;
     }
 }
+
+float calcularDPVetor(tipoVetor v){
+    float sum = 0.0, mean, DP = 0.0;
+    int i;
+    for (i = 0; i < v.tam; ++i) {
+        sum += v.vet[i];
+    }
+    float media = sum / v.tam;
+    for (i = 0; i < v.tam; ++i) {
+        DP += pow(v.vet[i] - media, 2);    
+    }
+    return sqrt(DP / v.tam);
+}
+
 void bubbleSort(tipoVetor *v) {
     unsigned n = v->tam;
 
