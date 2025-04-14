@@ -5,10 +5,6 @@
 #include <time.h>
 
 
-typedef struct tipoVetor{
-    unsigned int vet[1000000];
-    unsigned int tam;
-}tipoVetor;
 
 void preencheVetor(tipoVetor *v){
     srand(time(NULL));
