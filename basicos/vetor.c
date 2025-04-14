@@ -7,7 +7,7 @@
 
 void criaVetor(tipoVetor * v, int size){
     v->tam = size;
-    v->vet = (int)malloc(sizeof(int)* size);
+    v->vet = (int*)malloc(sizeof(int)* size);
 }
 
 
