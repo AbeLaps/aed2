@@ -5,6 +5,12 @@
 #include <time.h>
 
 
+void criaVetor(tipoVetor * v, int size){
+    v->tam = size;
+    v->vet = (int)malloc(sizeof(int)* size);
+}
+
+
 
 void preencheVetor(tipoVetor *v){
     srand(time(NULL));
