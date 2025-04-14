@@ -3,8 +3,8 @@
 
 
 typedef struct tipoVetor{
-    unsigned int vet[1000000];
-    unsigned int tam;
+     int vet*;
+     int tam; 
 }tipoVetor;
 
 void criaVetor(tipoVetor * v );
