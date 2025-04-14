@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <time.h>
+//#include <lista.h>
+//#include <lista.c>
+//#include <vetor.h>
+//#include <vetor.c>
+
+
+typedef struct tipoNo {
+    int dado;
+    struct tipoNo * prox;
+}tipoNo;
+
+typedef struct tipoLista {
+   tipoNo * prim;
+
+}tipoLista;
+
+int main(){
+
+    tipoVetor *v1;
+    criaVetor(v1);
+    int n,k;
+    float tempo_tot = 0;
+
+    FILE *arquivo1 = fopen("tempos_busca_seq.txt", "w");
+    if (arquivo1 == NULL) {
+        printf("Erro ao abrir arquivo!\n");
+        return 1;
+    }   
+
+    FILE *arquivo2 = fopen("tempos_busca_lista.txt", "w");
+    if (arquivo2 == NULL) {
+        printf("Erro ao abrir arquivo!\n");
+        return 1;
+    }
+    
+
+for(int i = 0;i < 30;i++){
+        if(i < 15){ //numero aleatorio
+            n = rand();
+            k=n;
+        }
+        else{
+            n = rand() % (int) 1e6; //numero aleatorio dentro do vetor
+            k=v1.vet[n];
+        }
+        clock_t tempoini = clock();
+        buscaSeqVetor(v1,k);
+        clock_t tempof = clock();
+        tempo_tot = (float)(tempof - tempoini) / CLOCKS_PER_SEC;
+        fprintf(arquivo1, "%d;%.12f\n", i, tempo_tot);
+    }
+    fclose(arquivo2);
+    printf("Tempos salvos em Q2tempos_busca_seq.txt\n");
+
+
+
+    tipoLista *l;
+    criaLista();
+    preencheListaComVetor();
+
+    for(int i = 0;i < 30;i++){
+        if(i < 15){ //numero aleatorio
+            n = rand();
+            k = n;
+        }
+        else{
+            n = rand() % (int) 1e6; //numero aleatorio dentro da lista
+            k = v1.vet[n] ;
+        }
+        clock_t tempoini = clock();
+        buscaSeqLista(l,k);
+        clock_t tempof = clock();
+        tempo_tot = (float)(tempof - tempoini) / CLOCKS_PER_SEC;
+        fprintf(arquivo2, "%d;%.12f\n", i, tempo_tot);
+    }
+    fclose(arquivo2);
+    printf("Tempos salvos em Q2tempos_busca_lista.txt\n");
+}
