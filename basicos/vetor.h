@@ -3,7 +3,7 @@
 
 
 typedef struct tipoVetor{
-     int vet*;
+     int * vet;
      int tam; 
 }tipoVetor;
 
