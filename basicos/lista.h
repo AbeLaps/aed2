@@ -14,13 +14,13 @@ typedef struct tipoLista {
 
 }tipoLista;
 
-void criaLista (tipolista * l);
+void criaLista (tipoLista * l);
 
 int buscaSeq (tipoLista *l, int chave);
 
 void preencheLista (tipoLista *l, unsigned tam);
 
-void preencheListaComVetor (tipolista *l, tipoVetor *v);
+void preencheListaComVetor (tipoLista *l, tipoVetor *v);
 
 
 #endif
