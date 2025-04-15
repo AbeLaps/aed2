@@ -9,6 +9,8 @@ typedef struct tipoVetor{
 
 void criaVetor(tipoVetor * v, int size );
 
+void copiaVetor(tipoVetor * v, tipoVetor * v1);
+
 void preencheVetor(tipoVetor * v);
 
 void preencheVetorOrdenado(tipoVetor * v);
