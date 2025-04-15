@@ -21,7 +21,7 @@ int main(){
     tipoVetor v;
     tipoLista l1;
     criaVetor(&v,1000000);
-    criaLista(l1);
+    criaLista(&l1);
     preencheVetor(&v);
 
     int n,k;
@@ -56,7 +56,7 @@ int main(){
             k = v.vet[n];
         }
         clock_t tempoini = clock();
-        buscaSeqLista(l1,k);
+        buscaSeqLista(&l1,k);
         clock_t tempof = clock();
         tempo_tot = (float)(tempof - tempoini) / CLOCKS_PER_SEC;
         fprintf(arquivo2, "%d;%.12f\n", i, tempo_tot);
