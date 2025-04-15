@@ -7,25 +7,23 @@ typedef struct tipoVetor{
      int tam; 
 }tipoVetor;
 
-void criaVetor(tipoVetor *v, int size );
+void criaVetor(tipoVetor * v, int size );
 
-void preencheVetor(tipoVetor *v);
+void preencheVetor(tipoVetor * v);
 
-void preencheVetorOrdenado(tipoVetor *v);
+void preencheVetorOrdenado(tipoVetor * v);
 
 float calcularDPVetor(tipoVetor v);
-
-void printaVetor(tipoVetor *v);
 
 int buscaSeqVetor(tipoVetor v, unsigned int chave);
 
 int buscaBin(tipoVetor v, unsigned int chave);
 
-void qSort (tipoVetor * v);
+void quickSort (tipoVetor * v);
 
-void selSort (tipoVetor * v);
+void selectionSort (tipoVetor * v);
 
-void insertSort (tipoVetor * v);
+void insertionSort (tipoVetor * v);
 
 void bubbleSort (tipoVetor * v);
 
