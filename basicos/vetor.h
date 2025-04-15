@@ -7,11 +7,11 @@ typedef struct tipoVetor{
      int tam; 
 }tipoVetor;
 
-void criaVetor(tipoVetor * v );
+void criaVetor(tipoVetor *v, int size );
 
-void preencheVetor(tipoVetor v);
+void preencheVetor(tipoVetor *v);
 
-void preencheVetorOrdenado(tipoVetor v);
+void preencheVetorOrdenado(tipoVetor *v);
 
 float calcularDPVetor(tipoVetor v);
 
