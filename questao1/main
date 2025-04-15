@@ -18,8 +18,8 @@ int main(){
     }
     
     tipoVetor v,v1,tempos;
-    criaVetor(&v,1000000);
-    criaVetor(&v1,1000000);
+    criaVetor(&v,1e9);
+    criaVetor(&v1,1e9);
     criaVetor(&tempos,30);
 
     preencheVetorOrdenado(&v);
@@ -33,7 +33,7 @@ int main(){
             k=n;
         }
         else{
-            n = rand() %(int) 1e6; //numero aleatorio dentro do vetor
+            n = rand() %(int) 1e9; //numero aleatorio dentro do vetor
             k=v.vet[n];
         }
         clock_t tempoini = clock();
@@ -54,7 +54,7 @@ int main(){
             k=n;
         }
         else{
-            n = rand() % (int) 1e6; //numero aleatorio dentro do vetor
+            n = rand() % (int) 1e9; //numero aleatorio dentro do vetor
             k=v1.vet[n];
         }
         clock_t tempoini = clock();
@@ -66,7 +66,7 @@ int main(){
     }
     fprintf(arquivo2, "Desvio padrao: %.12f\n", calcularDPVetor(tempos));
     fclose(arquivo2);
-    printf("Tempos salvos em tempos_busca_seq.txt\n");
+    printf("Tempos salvos em tempos_busca_seq.txt");
 
     return 1;
 }
