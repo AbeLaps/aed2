@@ -3,20 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <math.h>
 
-float calcularDPVetor(tipoVetor v){
-    float sum = 0.0, mean, DP = 0.0;
-    int i;
-    for (i = 0; i < v.tam; ++i) {
-        sum += v.vet[i];
-    }
-    float media = sum / v.tam;
-    for (i = 0; i < v.tam; ++i) {
-        DP += pow(v.vet[i] - media, 2);    
-    }
-    return sqrt(DP / v.tam);
-}
 
 int main(){
     FILE *arquivo1 = fopen("tempos_busca_binaria.txt", "w");
@@ -56,7 +43,7 @@ int main(){
         fprintf(arquivo1, "%d;%.12f\n", i, tempo_tot);
         tempos.vet[i] = tempo_tot;
     }
-    fprintf(arquivo1, "%d;%.12f\n", 31, calcularDPVetor(tempos));
+    fprintf(arquivo1, "Desvio padrao: %.12f\n", calcularDPVetor(tempos));
     fclose(arquivo1);
     printf("Tempos salvos em tempos_busca_binaria.txt\n");
 
@@ -77,7 +64,7 @@ int main(){
         fprintf(arquivo2, "%d;%.12f\n", i, tempo_tot);
         tempos.vet[i] = tempo_tot;
     }
-    fprintf(arquivo2, "%d;%.12f\n", 31, calcularDPVetor(tempos));
+    fprintf(arquivo2, "Desvio padrao: %.12f\n", calcularDPVetor(tempos));
     fclose(arquivo2);
     printf("Tempos salvos em tempos_busca_seq.txt\n");
 
