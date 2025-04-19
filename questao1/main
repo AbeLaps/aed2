@@ -1,3 +1,12 @@
+/*Nomes:
+Abel Andrade Prazeres dos Santos
+Bruna de Souza Brasil
+Gabriel Gregório dos Santos Vitor
+Gabriela Silva Malveira
+
+*/
+
+
 #include "vetor.h"
 #include "vetor.c"
 #include <stdio.h>
@@ -6,20 +15,20 @@
 
 
 int main(){
-    FILE *arquivo1 = fopen("tempos_busca_binaria.txt", "w");
+    FILE *arquivo1 = fopen("C:/VScode/UFAM-codigos/outputs/tempos_busca_binaria.txt", "w");
     if (arquivo1 == NULL) {
         printf("Erro ao abrir arquivo!\n");
         return 1;
     }
-    FILE *arquivo2 = fopen("tempos_busca_seq.txt", "w");
+    FILE *arquivo2 = fopen("C:/VScode/UFAM-codigos/outputs/tempos_busca_seq.txt", "w");
     if (arquivo2 == NULL) {
         printf("Erro ao abrir arquivo!\n");
         return 1;
     }
     
-    tipoVetor v,v1,tempos;
-    criaVetor(&v,1e9);
-    criaVetor(&v1,1e9);
+    tipoVetor v, v1, tempos;
+    criaVetor(&v,3e8);
+    criaVetor(&v1,3e8);
     criaVetor(&tempos,30);
 
     preencheVetorOrdenado(&v);
@@ -33,14 +42,14 @@ int main(){
             k=n;
         }
         else{
-            n = rand() %(int) 1e9; //numero aleatorio dentro do vetor
+            n = rand() %(int) 1e8; //numero aleatorio dentro do vetor
             k=v.vet[n];
         }
         clock_t tempoini = clock();
         buscaBin(v,k);
         clock_t tempof = clock();
         tempo_tot = ((float)(tempof - tempoini) / CLOCKS_PER_SEC);
-        fprintf(arquivo1, "%d;%.12f\n", i, tempo_tot);
+        fprintf(arquivo1, "%d;%.40f\n", i, tempo_tot);
         tempos.vet[i] = tempo_tot;
     }
     fprintf(arquivo1, "Desvio padrao: %.12f\n", calcularDPVetor(tempos));
@@ -54,14 +63,14 @@ int main(){
             k=n;
         }
         else{
-            n = rand() % (int) 1e9; //numero aleatorio dentro do vetor
+            n = rand() % (int) 1e8; //numero aleatorio dentro do vetor
             k=v1.vet[n];
         }
         clock_t tempoini = clock();
         buscaSeqVetor(v1,k);
         clock_t tempof = clock();
         tempo_tot = (float)(tempof - tempoini) / CLOCKS_PER_SEC;
-        fprintf(arquivo2, "%d;%.12f\n", i, tempo_tot);
+        fprintf(arquivo2, "%d;%.40f\n", i, tempo_tot);
         tempos.vet[i] = tempo_tot;
     }
     fprintf(arquivo2, "Desvio padrao: %.12f\n", calcularDPVetor(tempos));
