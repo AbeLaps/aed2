@@ -166,20 +166,20 @@ void mergeSort (tipoVetor *v) {
   free(aux);
 }
 
-int buscaBin(tipoVetor *v, unsigned int x) {
+int buscaBin(tipoVetor v, unsigned int x) {
     int inicio = 0;
-    int fim = v->tam - 1;
+    int fim = v.tam - 1;
 
     while (inicio <= fim) {
         int meio = (inicio + fim) / 2;
 
         // Verifica o elemento do meio
-        if (v->vet[meio] == x) {
+        if (v.vet[meio] == x) {
             return 1; // Retorna 1 se achar o valor
         }
 
         // Procura na direita
-        if (v->vet[meio] < x) {
+        if (v.vet[meio] < x) {
             inicio = meio + 1;
         }
         // Procura na esquerda
