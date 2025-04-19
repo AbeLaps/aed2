@@ -7,15 +7,19 @@ typedef struct tipoVetor{
      int tam; 
 }tipoVetor;
 
-void criaVetor(tipoVetor * v, int size );
+void criaVetor(tipoVetor *v, unsigned int size );
+
+void destroiVetor(tipoVetor *v);
+
+void preencheVetor(tipoVetor *v);
+
+void preencheVetorOrdenado(tipoVetor *v);
+
+float calcularDPVetor(tipoVetor v);
 
 void copiaVetor(tipoVetor * v, tipoVetor * v1);
 
-void preencheVetor(tipoVetor * v);
-
-void preencheVetorOrdenado(tipoVetor * v);
-
-float calcularDPVetor(tipoVetor v);
+void printaVetor(tipoVetor *v);
 
 int buscaSeqVetor(tipoVetor v, unsigned int chave);
 
