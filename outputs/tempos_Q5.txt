@@ -1,6 +1,7 @@
-busca seq0.000000
+busca seq
+0.000000
 
-parte 2:
+parte 1.2:
 1;0.000000
 2;0.000000
 3;0.000000
@@ -11,6 +12,7 @@ parte 2:
 8;0.000000
 9;0.000000
 10;0.000000
+
 parte 2 questao 5
 bubble sort: 0.06600000
 insertion sort: 0.00000000
