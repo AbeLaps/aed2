@@ -41,7 +41,7 @@ void preencheVetorOrdenado(tipoVetor *v){
 }
 
 float calcularDPVetor(tipoVetor v){
-    float sum = 0.0, mean, DP = 0.0;
+    float sum = 0.0, media, DP = 0.0;
     int i;
     for (i = 0; i < v.tam; ++i) {
         sum += v.vet[i];
