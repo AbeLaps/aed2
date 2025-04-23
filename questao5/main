@@ -20,11 +20,11 @@ int main(){
     tipoVetor v;
     int k, n;
     float tempo_tot;
-    FILE *arquivo1 = fopen("C:/VScode/UFAM-codigos/outputs/tempos_Q5.txt", "w");
-    if (arquivo1 == NULL) {
-        printf("Erro ao abrir arquivo!\n");
-        return 1;
-    }
+    FILE *arquivo1 = fopen("/home/gabriela.malveira/aed2/aed2/basicos/tempos_Q5.txt", "w");
+    // if (arquivo1 == NULL) {
+    //     perror("Erro ao abrir arquivo!\n");
+    //     return 1;
+    // }
 
     //questao 1
     fprintf(arquivo1,"busca seq");

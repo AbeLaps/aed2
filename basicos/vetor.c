@@ -1,12 +1,13 @@
 /*operacoes do vetor aqui */
-#include <vetor.h>
+#include "vetor.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 #include <math.h>
 
 
-void criaVetor(tipoVetor * v, int size){
+void criaVetor(tipoVetor * v, unsigned int size){
     v->tam = size;
     v->vet = (int*)malloc(sizeof(int)* size);
 }
@@ -22,6 +23,7 @@ void copiaVetor(tipoVetor * v, tipoVetor * v1){
     }
     return;
 }
+
 
 void preencheVetor(tipoVetor *v){
     srand(time(NULL));
@@ -44,20 +46,6 @@ void preencheVetorOrdenado(tipoVetor *v){
         v->vet[i] = k1;
     }
 }
-
-float calcularDPVetor(tipoVetor v){
-    float sum = 0.0, media, DP = 0.0;
-    int i;
-    for (i = 0; i < v.tam; ++i) {
-        sum += v.vet[i];
-    }
-    float media = sum / v.tam;
-    for (i = 0; i < v.tam; ++i) {
-        DP += pow(v.vet[i] - media, 2);    
-    }
-    return sqrt(DP / v.tam);
-}
-
 void bubbleSort(tipoVetor *v) {
     unsigned n = v->tam;
 
