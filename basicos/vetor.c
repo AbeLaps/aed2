@@ -10,6 +10,11 @@ void criaVetor(tipoVetor * v, int size){
     v->tam = size;
     v->vet = (int*)malloc(sizeof(int)* size);
 }
+void destroiVetor(tipoVetor *v){
+    free(v->vet);
+    v->tam = 0;
+    return;
+}
 
 void copiaVetor(tipoVetor * v, tipoVetor * v1){
     for (int j = 0; j < v1->tam; j++) {
