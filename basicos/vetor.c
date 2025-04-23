@@ -193,3 +193,23 @@ int buscaSeqVetor(tipoVetor v, unsigned int val) {
     }
     return -1;  // Retorna -1 caso o valor não seja encontrado
 }
+
+float calcularDPVetor (tipoVetor v) {
+    if (v.tam == 0) return 0.0;
+
+    float soma = 0;
+
+    for ( int i = 0; i < v.tam; i++) {
+        soma += v.vet[i];
+    }
+
+    float media = soma / v.tam;
+    float soma_dif_quad = 0;
+
+    for ( int i = 0; i < v.tam; i++) {
+        float dif = v.vet[i] - media;
+        soma_dif_quad += dif * dif;
+    }
+    
+    return sqrt(soma_dif_quad / v.tam);
+}
