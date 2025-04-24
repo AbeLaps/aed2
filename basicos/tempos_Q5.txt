@@ -1,0 +1,59 @@
+busca seq0.000000
+
+parte 2:
+1;0.000000
+2;0.000000
+3;0.000000
+4;0.000000
+5;0.000000
+6;0.000000
+7;0.000000
+8;0.000000
+9;0.000000
+10;0.000000
+parte 2 questao 5
+bubble sort: 0.06200000
+insertion sort: 0.00000000
+selection sort: 0.06500000
+quick sort: 0.00000000
+merge sort: 0.00100000
+bubble sort: 0.25799999
+insertion sort: 0.00000000
+selection sort: 0.21799999
+quick sort: 0.00000000
+merge sort: 0.00100000
+bubble sort: 0.55400002
+insertion sort: 0.00000000
+selection sort: 0.49000001
+quick sort: 0.00000000
+merge sort: 0.00100000
+bubble sort: 0.99000001
+insertion sort: 0.00000000
+selection sort: 0.87699997
+quick sort: 0.00000000
+merge sort: 0.00200000
+bubble sort: 1.55299997
+insertion sort: 0.00100000
+selection sort: 1.37300003
+quick sort: 0.00000000
+merge sort: 0.00300000
+bubble sort: 2.23799992
+insertion sort: 0.00000000
+selection sort: 1.97000003
+quick sort: 0.00000000
+merge sort: 0.00300000
+bubble sort: 3.05399990
+insertion sort: 0.00000000
+selection sort: 2.69000006
+quick sort: 0.00000000
+merge sort: 0.00300000
+bubble sort: 4.01599979
+insertion sort: 0.00000000
+selection sort: 3.62100005
+quick sort: 0.00000000
+merge sort: 0.00400000
+bubble sort: 5.12300014
+insertion sort: 0.00000000
+selection sort: 4.49599981
+quick sort: 0.00000000
+merge sort: 0.00500000
