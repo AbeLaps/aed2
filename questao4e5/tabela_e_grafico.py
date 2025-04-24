@@ -40,33 +40,33 @@ if len(dados_busca['Execução']) == len(dados_busca['Busca Sequencial']) == len
     # Questão 5 - Gráficos de Tempo Médio de Execução vs Tamanho do Vetor
     # ------------------------------------------
 
-    # Exemplo de dados
-    tamanhos = [10_000, 20_000, 30_000, 40_000, 50_000, 60_000, 70_000, 80_000, 90_000, 100_000]
-    tempos_bubble = [0.06600000, 0.25500000, 0.56099999, 1.01300001, 1.56599998, 2.25900006, 2.25900006, 3.07200003, 4.01100016, 5.07600021]
-    tempos_inserction = [0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000,
-    0.00000000, 0.00000000, 0.00100000, 0.00000000]
-    tempos_selection = [ 0.05800000, 0.23100001, 0.51300001, 0.91799998, 1.44299996,
-    2.07800007, 2.82800007, 3.68700004, 4.73199987]
-    tempos_quick = [0.00000000, 0.00100000, 0.00100000, 0.00200000, 0.00200000,
-    0.00200000, 0.00200000, 0.00300000, 0.00300000]
-    tempos_merge = [0.00000000, 0.00100000, 0.00200000, 0.00200000, 0.00200000,
-    0.00400000, 0.00400000, 0.00400000, 0.00600000]
+# Dados de exemplo
+tamanhos = [10_000, 20_000, 30_000, 40_000, 50_000, 60_000, 70_000, 80_000, 90_000, 100_000]
 
-    # Criando o gráfico
-    plt.figure(figsize=(10, 6))
+# Dados de tempos para cada algoritmo
+tempos_bubble = [0.06100000, 0.25299999, 0.55900002, 0.99199998, 1.55799997, 2.23200011, 3.04600000, 4.03700018, 5.12300014, 6.44299984]
+tempos_insertion = [0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000]
+tempos_selection = [0.05700000, 0.21699999, 0.49200001, 0.87300003, 1.36500001, 1.99800003, 2.71099997, 3.57900000, 4.54899979, 5.62699986]
+tempos_quick = [0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000, 0.00000000]
+tempos_merge = [0.00100000, 0.00100000, 0.00100000, 0.00200000, 0.00300000, 0.00300000, 0.00400000, 0.00500000, 0.00500000, 0.00500000]
 
-    plt.plot(tamanhos, tempos_seq, marker='o', label='Busca Sequencial', color='blue')
-    plt.plot(tamanhos, tempos_bin, marker='s', label='Busca Binária', color='green')
+# Criando o gráfico
+plt.figure(figsize=(10, 6))
 
-    # Configurando o gráfico
-    plt.xlabel('Tamanho do Vetor')
-    plt.ylabel('Tempo de Execução (ms)')
-    plt.title('Tempo Médio de Execução vs Tamanho do Vetor')
-    plt.legend()
-    plt.grid(True)
-    plt.tight_layout()
+# Plotando os gráficos para cada tipo de ordenação
+plt.plot(tamanhos, tempos_bubble, marker='o', label='Bubble Sort', color='blue')
+plt.plot(tamanhos, tempos_insertion, marker='s', label='Insertion Sort', color='green')
+plt.plot(tamanhos, tempos_selection, marker='^', label='Selection Sort', color='red')
+plt.plot(tamanhos, tempos_quick, marker='d', label='Quick Sort', color='yellow')
+plt.plot(tamanhos, tempos_merge, marker='x', label='Merge Sort', color='pink')
 
-    # Exibindo o gráfico
-    plt.show()
-else:
-    print("Erro: As listas de 'Busca Sequencial' e 'Busca Binária' não têm o mesmo número de elementos!")
+# Configurando o gráfico
+plt.xlabel('Tamanho do Vetor')
+plt.ylabel('Tempo de Execução (ms)')
+plt.title('Tempo Médio de Execução vs Tamanho do Vetor')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+
+# Exibindo o gráfico
+plt.show()
