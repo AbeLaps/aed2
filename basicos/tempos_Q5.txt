@@ -1,59 +1,81 @@
-busca seq0.000000
-
-parte 2:
-1;0.000000
-2;0.000000
-3;0.000000
-4;0.000000
-5;0.000000
-6;0.000000
-7;0.000000
-8;0.000000
-9;0.000000
-10;0.000000
+Tamanho: 100000
+Busca Seq (Vetor) - Tempo: 0.00000000
+Busca Seq (Lista) - Tempo: 0.00000000
+Tamanho: 200000
+Busca Seq (Vetor) - Tempo: 0.00000000
+Busca Seq (Lista) - Tempo: 0.00000000
+Tamanho: 300000
+Busca Seq (Vetor) - Tempo: 0.00000000
+Busca Seq (Lista) - Tempo: 0.00000000
+Tamanho: 400000
+Busca Seq (Vetor) - Tempo: 0.00000000
+Busca Seq (Lista) - Tempo: 0.00000000
+Tamanho: 500000
+Busca Seq (Vetor) - Tempo: 0.00000000
+Busca Seq (Lista) - Tempo: 0.00000000
+Tamanho: 600000
+Busca Seq (Vetor) - Tempo: 0.00000000
+Busca Seq (Lista) - Tempo: 0.00000000
+Tamanho: 700000
+Busca Seq (Vetor) - Tempo: 0.00000000
+Busca Seq (Lista) - Tempo: 0.00000000
+Tamanho: 800000
+Busca Seq (Vetor) - Tempo: 0.00000000
+Busca Seq (Lista) - Tempo: 0.00000000
+Tamanho: 900000
+Busca Seq (Vetor) - Tempo: 0.00000000
+Busca Seq (Lista) - Tempo: 0.00000000
+Tamanho: 1000000
+Busca Seq (Vetor) - Tempo: 0.00000000
+Busca Seq (Lista) - Tempo: 0.00000000
 parte 2 questao 5
-bubble sort: 0.06200000
+bubble sort: 0.06100000
 insertion sort: 0.00000000
-selection sort: 0.06500000
+selection sort: 0.05700000
+quick sort: 0.00000000
+merge sort: 0.00000000
+bubble sort: 0.25299999
+insertion sort: 0.00000000
+selection sort: 0.21699999
 quick sort: 0.00000000
 merge sort: 0.00100000
-bubble sort: 0.25799999
+bubble sort: 0.55900002
 insertion sort: 0.00000000
-selection sort: 0.21799999
+selection sort: 0.49200001
 quick sort: 0.00000000
 merge sort: 0.00100000
-bubble sort: 0.55400002
+bubble sort: 0.99199998
 insertion sort: 0.00000000
-selection sort: 0.49000001
-quick sort: 0.00000000
-merge sort: 0.00100000
-bubble sort: 0.99000001
-insertion sort: 0.00000000
-selection sort: 0.87699997
+selection sort: 0.87300003
 quick sort: 0.00000000
 merge sort: 0.00200000
-bubble sort: 1.55299997
-insertion sort: 0.00100000
-selection sort: 1.37300003
+bubble sort: 1.55799997
+insertion sort: 0.00000000
+selection sort: 1.36500001
 quick sort: 0.00000000
 merge sort: 0.00300000
-bubble sort: 2.23799992
+bubble sort: 2.23200011
 insertion sort: 0.00000000
-selection sort: 1.97000003
+selection sort: 1.99800003
 quick sort: 0.00000000
 merge sort: 0.00300000
-bubble sort: 3.05399990
+bubble sort: 3.04600000
 insertion sort: 0.00000000
-selection sort: 2.69000006
-quick sort: 0.00000000
-merge sort: 0.00300000
-bubble sort: 4.01599979
-insertion sort: 0.00000000
-selection sort: 3.62100005
+selection sort: 2.71099997
 quick sort: 0.00000000
 merge sort: 0.00400000
+bubble sort: 4.03700018
+insertion sort: 0.00000000
+selection sort: 3.57900000
+quick sort: 0.00000000
+merge sort: 0.00500000
 bubble sort: 5.12300014
 insertion sort: 0.00000000
-selection sort: 4.49599981
+selection sort: 4.54899979
+quick sort: 0.00000000
+merge sort: 0.00500000
+bubble sort: 6.44299984
+insertion sort: 0.00000000
+selection sort: 5.62699986
 quick sort: 0.00000000
 merge sort: 0.00500000
