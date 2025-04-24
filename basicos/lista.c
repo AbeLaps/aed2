@@ -3,52 +3,62 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-void criaLista (tipoLista *l){
+// Cria uma lista vazia
+void criaLista(tipoLista *l) {
     l->prim = NULL;
 }
 
+// Busca sequencial segura na lista
+int buscaSeqLista(tipoLista *l, int key) {
+    tipoNo *aux = l->prim;
+    while (aux != NULL) {
+        if (aux->dado == key)
+            return 1;
+        aux = aux->prox;
+    }
+    return 0;
+}
 
-int buscaSeqLista (tipoLista *l, int key){
-    if(l->prim == NULL){
-        return 0;
-        }
-   else { tipoNo *  aux = l->prim;
-        while(aux ->dado != key){
-            aux = aux->prox;
-        }
+// Preenche uma lista a partir de um vetor
+void preencheListaComVetor(tipoLista *l, tipoVetor *v) {
+    if (v->tam == 0) {
+        l->prim = NULL;
+        return;
+    }
+
+    tipoNo *novo = (tipoNo *)malloc(sizeof(tipoNo));
+    novo->dado = v->vet[0];
+    novo->prox = NULL;
+    l->prim = novo;
+
+    tipoNo *aux = novo;
+    for (int i = 1; i < v->tam; i++) {
+        tipoNo *novo = (tipoNo *)malloc(sizeof(tipoNo));
+        novo->dado = v->vet[i];
+        novo->prox = NULL;
+        aux->prox = novo;
+        aux = novo;
     }
 }
 
+// Preenche uma lista com inteiros aleatórios
+void preencheLista(tipoLista *l, int tam) {
+    if (tam == 0) {
+        l->prim = NULL;
+        return;
+    }
 
-void preencheListaComVetor (tipoLista*l, tipoVetor *v){
-    int i = v->tam;
-    int j = 1;
-    tipoNo * aux;
-    aux =(tipoNo*)malloc(sizeof(tipoNo));
-    aux->dado = v->vet[0];
-    while (i != j){
-        aux->prox =(tipoNo*)malloc(sizeof(tipoNo));
-        aux->dado = v->vet[j];
-        aux = aux->prox;
-        j++;
+    tipoNo *novo = (tipoNo *)malloc(sizeof(tipoNo));
+    novo->dado = rand();
+    novo->prox = NULL;
+    l->prim = novo;
+
+    tipoNo *aux = novo;
+    for (int i = 1; i < tam; i++) {
+        tipoNo *novo = (tipoNo *)malloc(sizeof(tipoNo));
+        novo->dado = rand();
+        novo->prox = NULL;
+        aux->prox = novo;
+        aux = novo;
     }
 }
-
-
-void preencheLista (tipoLista *l, int tam){
-    int i = 0;
-    tipoNo * aux;
-    aux = (tipoNo *)malloc(sizeof(tipoNo));
-     aux->dado = rand();
-    while(i != tam){
-        aux->prox =(tipoNo*)malloc(sizeof(tipoNo));
-        aux = aux->prox;
-        aux->dado = rand();
-        i++;
-    }    
-}
-
-
-
-
