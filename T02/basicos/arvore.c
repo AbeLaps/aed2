@@ -1,13 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
-
-typedef struct arv{
-    int info;
-    struct arv* esq;
-    struct arv* dir;
-} Arv ;
+#include "arvore.h"
 
 Arv* criaArv(int val){
     Arv *arv;
