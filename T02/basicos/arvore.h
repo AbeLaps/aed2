@@ -6,7 +6,7 @@ typedef struct Arv{
     int info;
     struct Arv* esq;
     struct Arv* dir;
-    int fb;
+    
 } Arv ;
 
 Arv* criaArv(int val);
