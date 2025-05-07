@@ -13,14 +13,13 @@ Arv* criaArv(int val){
 }
 
 void visita(Arv* arv){
-    //if(arv->info != NULL){
     printf("%d ",arv->info);
-    //}
+    
     return;
 }
 
 void preFix(Arv* arv){
-    if(!arv){
+    if(arv != NULL){
     visita(arv);
     preFix(arv->esq);
     preFix(arv->dir);
@@ -30,7 +29,7 @@ void preFix(Arv* arv){
 }
 
 void posFix(Arv* arv){
-    if(!arv){
+    if(arv != NULL){
     posFix(arv->esq);
     posFix(arv->dir);
     visita(arv);
