@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "arvore.h"
+#include "ABP.h"
 
 Arv* criaArv(int val){
     Arv *arv;
@@ -42,10 +42,9 @@ void posFix(Arv* arv){
 void ordem(Arv* arv){
     if(arv != NULL){
     ordem(arv->esq);
-    visita(arv);
+    printf("%d  ",arv->info);
     ordem(arv->dir);
     }
-    
     return;
 }
 
@@ -58,7 +57,7 @@ int tamArv(Arv* arv){
     return 0;
 }
 
-void insereArv(Arv* arv, int val){
+void insereValArv(Arv* arv, int val){
     Arv* aux = arv;
     while(aux != NULL){
     if(aux->info < val){
@@ -80,47 +79,11 @@ void insereArv(Arv* arv, int val){
     return;
 }
 
-//funcao para teste. nenhuma funcao no trab final
-void criaFilhoRand(Arv* arv, int f){
-    /*
-    se f == 0 popula o no mais a esquerda possivel 
-    se f != 0 popula o no mais a direita possivel
-    */
-    Arv* aux = arv;
-    if(f == 0){
-        while(aux->esq != NULL){aux = aux->esq;}
-    }
-    else{
-        while(aux->dir != NULL){aux = aux->dir;}
-        }
-
-    int k = rand();
-    aux->esq = criaArv(k);
-    insereArv(aux, k %100); //insere na esq
-    aux->dir = criaArv(k);
-    insereArv(aux,k); //insere na dir
-    return;
-}
-
-
 
 void popularArvRand(Arv* arv, int tam){
     if(arv == NULL){return;}
-    Arv* aux = arv;
-    int n = 0;
-    criaFilhoRand(arv,0);
-    //chamar da esquerda tam *
-    while(n < tam - 1){
-        criaFilhoRand(aux->esq,0);
-        aux = aux->esq;
-        n++;
-    }
-    //chamar da direita tam *
-    aux = arv;
-    n = 0;
-    while(n < tam - 1){
-        criaFilhoRand(aux->dir,1);
-        aux = aux->dir;
-        n++;
+    for(int i = 0; i < tam;i++){
+        int k = rand();
+        insereValArv(arv,k);
     }
 }
