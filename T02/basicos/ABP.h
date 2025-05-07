@@ -28,7 +28,7 @@ void insereArv(Arv* arv, int val);
 
 void popularArvRand(Arv* arv, int tam);
 
-int pegaMeio (Arv* arv, tipoVetor *v, int ini, int fim);
+void pegaMeio (Arv* arv, tipoVetor *v, int ini, int fim);
 
 void popularArvVet(Arv* arv, tipoVetor *vet);
 
