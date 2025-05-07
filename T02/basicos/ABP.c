@@ -39,11 +39,11 @@ void posFix(Arv* arv){
     return;
 }
 
-void ordem(Arv* arv){
+void inFix(Arv* arv){
     if(arv != NULL){
-    ordem(arv->esq);
+    inFix(arv->esq);
     printf("%d  ",arv->info);
-    ordem(arv->dir);
+    inFix(arv->dir);
     }
     return;
 }
