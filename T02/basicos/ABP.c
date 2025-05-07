@@ -87,3 +87,15 @@ void popularArvRand(Arv* arv, int tam){
         insereValArv(arv,k);
     }
 }
+
+Arv* busca(Arv* arv, int chave){
+    if (arv == NULL || arv->info == chave) {
+        return arv;
+    }
+    else if (arv->info < chave) {
+        return busca(arv->dir, chave);
+    }
+    else {
+        return busca(arv->esq, chave);
+    }
+}
