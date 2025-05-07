@@ -88,14 +88,14 @@ void popularArvRand(Arv* arv, int tam){
     }
 }
 
-Arv* busca(Arv* arv, int chave){
+Arv* buscaABP(Arv* arv, int chave){
     if (arv == NULL || arv->info == chave) {
         return arv;
     }
     else if (arv->info < chave) {
-        return busca(arv->dir, chave);
+        return buscaABP(arv->dir, chave);
     }
     else {
-        return busca(arv->esq, chave);
+        return buscaABP(arv->esq, chave);
     }
 }
