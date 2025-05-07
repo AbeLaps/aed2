@@ -1,3 +1,6 @@
+#ifndef ABP_H
+#define ABP_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -17,12 +20,16 @@ void preFix(Arv* arv);
 
 void posFix(Arv* arv);
 
-void ordem(Arv* arv);
+void inFix(Arv* arv);
 
 int tamArv(Arv* arv);
 
 void insereArv(Arv* arv, int val);
 
-void criaFilhoRand(Arv* arv, int f);
-
 void popularArvRand(Arv* arv, int tam);
+
+int pegaMeio (Arv* arv, tipoVetor *v, int ini, int fim);
+
+void popularArvVet(Arv* arv, tipoVetor *vet);
+
+#endif
