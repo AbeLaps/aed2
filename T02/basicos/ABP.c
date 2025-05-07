@@ -1,7 +1,12 @@
+#ifndef ABP_C
+#define ABP_C
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "ABP.h"
+#include "vetor.h"
+#include "vetor.c"
 
 Arv* criaArv(int val){
     Arv *arv;
@@ -13,8 +18,9 @@ Arv* criaArv(int val){
 }
 
 void visita(Arv* arv){
+    //if(arv->info != NULL){
     printf("%d ",arv->info);
-    
+    //}
     return;
 }
 
@@ -87,19 +93,19 @@ void popularArvRand(Arv* arv, int tam){
     }
 }
 
-int pegaMeio (Arv* arv, tipoVetor *v, int ini, int fim){
+void pegaMeio (Arv* arv, tipoVetor *v, int ini, int fim){
     int i = ini;
     int j = fim;
     int meio = (i+j)/2 ;
-    //insereArv(arv, v[meio]);
-    if(ini == fim){return v->vet[meio];}
-    insereValArv(arv, pegaMeio(arv, v, 0, j -1));
-    insereValArv(arv, pegaMeio(arv, v,j+1, v->tam));
-    return v->vet[meio];
+    insereValArv(arv, v->vet[meio]);
+    pegaMeio(arv, v, ini, meio - 1);
+    pegaMeio(arv, v, meio + 1, fim);
+    return;
 }
 void popularArvVet(Arv* arv, tipoVetor *vet){
     if(vet == NULL){return;}
-    pegaMeio(arv, vet, 0, vet->tam);
+    pegaMeio(arv, vet, 0, vet->tam/2 - 1);
+    pegaMeio(arv, vet, vet->tam/2 + 1,vet->tam);
 }
 
 Arv* buscaABP(Arv* arv, int chave){
@@ -113,3 +119,4 @@ Arv* buscaABP(Arv* arv, int chave){
         return buscaABP(arv->esq, chave);
     }
 }
+#endif
