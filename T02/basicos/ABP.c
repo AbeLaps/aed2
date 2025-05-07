@@ -88,6 +88,21 @@ void popularArvRand(Arv* arv, int tam){
     }
 }
 
+int pegaMeio (Arv* arv, tipoVetor *v, int ini, int fim){
+    int i = ini;
+    int j = fim;
+    int meio = (i+j)/2 ;
+    //insereArv(arv, v[meio]);
+    if(ini == fim){return v->vet[meio];}
+    insereValArv(arv, pegaMeio(arv, v, 0, j -1));
+    insereValArv(arv, pegaMeio(arv, v,j+1, v->tam));
+    return v->vet[meio];
+}
+void popularArvVet(Arv* arv, tipoVetor *vet){
+    if(vet == NULL){return;}
+    pegaMeio(arv, vet, 0, vet->tam);
+}
+
 Arv* buscaABP(Arv* arv, int chave){
     if (arv == NULL || arv->info == chave) {
         return arv;
