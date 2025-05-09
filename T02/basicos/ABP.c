@@ -53,14 +53,39 @@ void inFix(Arv* arv){
     return;
 }
 
-int tamArv(Arv* arv){
-    Arv* aux = arv;
-    int tam = 0;
-    while(aux!=NULL){
-        printf("a");
+int tamArv (Arv* arv){
+        if (arv ==NULL){
+            return(-1);
+        }    
+        int tamEsq,tamDir = 0;
+        Arv* auxDir = arv->dir; 
+        Arv* auxEsq = arv->esq;
+        tamDir = auxTam(auxDir,tamDir);
+        tamEsq = auxTam(auxEsq,tamEsq);
+        if (tamDir > tamEsq){
+            return(tamDir);
+           }
+        return(tamEsq);
     }
-    return 0;
-}
+    
+    int auxTam (Arv* arv, int tam){
+        int tamDir, tamEsq = tam;
+        if (arv->dir != NULL){
+            tamDir += 1;
+            tamDir = auxTam (arv->dir,tamDir);
+        }
+        if (arv->esq != NULL){
+            tamEsq += 1;
+            tamEsq = auxTam (arv->esq,tamEsq);
+        }
+        if (tamDir>tamEsq){
+            return(tamDir);
+        }
+        else{
+            return(tamEsq);
+        }
+    }
+
 
 void insereValArv(Arv* arv, int val){
     Arv* aux = arv;
