@@ -82,7 +82,7 @@ int tamAvl (Avl* avl){
         }
     }
 
-int buscaAvl(Avl*avl, int val){
+int buscaAvl(Avl* avl, int val){
     Avl* aux = avl;
     while (aux->dir != NULL && aux->esq != NULL){
         if (aux->info > val){
