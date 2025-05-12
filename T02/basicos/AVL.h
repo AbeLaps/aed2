@@ -5,6 +5,7 @@ typedef struct Avl {
     int info;
     Avl * esq;
     Avl * dir;
+    Avl * pai;
     int fb;
 }Avl;
 
