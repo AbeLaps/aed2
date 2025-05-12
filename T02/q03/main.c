@@ -6,20 +6,20 @@
 #include "ABP.h"
 
 
-int main(){
-    FILE *arquivo1 = fopen("/home/icomp/aed2ss/aed2/T02/q03/tempos_busca_binariaVet.txt", "w");
+int main() {
+    FILE *arquivo1 = fopen("tempos_buscaVet.txt", "w");
     if (arquivo1 == NULL) {
         printf("Erro ao abrir arquivo!\n");
         return 1;
     }
-    FILE *arquivo2 = fopen("/home/icomp/aed2ss/aed2/T02/q03/tempos_buscaABP.txt", "w");
+    FILE *arquivo2 = fopen("tempos_buscaABP.txt", "w");
     if (arquivo2 == NULL) {
        printf("Erro ao abrir arquivo!\n");
        return 1;
     }
     
     tipoVetor v;
-    criaVetor(&v,1e3);
+    criaVetor(&v,1e7);
 
     preencheVetorOrdenado(&v);
     int n,k;
@@ -31,7 +31,7 @@ int main(){
             k=n;
         }
         else{
-            n = rand() %(int) 1e3; //numero aleatorio dentro do vetor
+            n = rand() %(int) 1e7; //numero aleatorio dentro do vetor
             k=v.vet[n];
         }
         clock_t tempoini = clock();
@@ -43,8 +43,11 @@ int main(){
     fclose(arquivo1);
     printf("Tempos salvos em tempos_busca_binariaVet.txt\n");
     printf("comecando");
+    printf("comecando");
+    printf("comecando");
 
     Arv* arv = criaArv(v.vet[(v.tam)/2]);
+    printf("comecando");
     popularArvVet(arv,&v);
     printf("populei");
     for(int i = 0;i < 30 ;i++){
@@ -53,7 +56,7 @@ int main(){
             k=n;
         }
         else{
-            n = rand() %(int) 1e3; //numero aleatorio dentro do arvore
+            n = rand() %(int) 1e7; //numero aleatorio dentro do arvore
             k=v.vet[n];
         }
         printf("fazendo...\n");
