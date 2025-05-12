@@ -119,9 +119,10 @@ void popularArvRand(Arv* arv, int tam){
 }
 
 void pegaMeio (Arv* arv, tipoVetor *v, int ini, int fim){
+    if (ini > fim){ return; } 
     int i = ini;
     int j = fim;
-    int meio = (i+j)/2 ;
+    int meio = (i+j)/2;
     insereValArv(arv, v->vet[meio]);
     pegaMeio(arv, v, ini, meio - 1);
     pegaMeio(arv, v, meio + 1, fim);
@@ -129,6 +130,7 @@ void pegaMeio (Arv* arv, tipoVetor *v, int ini, int fim){
 }
 void popularArvVet(Arv* arv, tipoVetor *vet){
     if(vet == NULL){return;}
+    insereValArv(arv,vet->tam/2);
     pegaMeio(arv, vet, 0, vet->tam/2 - 1);
     pegaMeio(arv, vet, vet->tam/2 + 1,vet->tam);
 }
