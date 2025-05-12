@@ -40,12 +40,30 @@ void posFix(Avl* avl){
 
 void OrdemAvl(Avl* avl){
     if(avl != NULL){
-    Ordem(avl->esq);
+    OrdemAvl(avl->esq);
     visitaAvl(avl);
-    Ordem(avl->dir);
+    OrdemAvl(avl->dir);
     }
 
     return;
+}
+
+int auxTam (Avl*avl, int tam){
+    int tamDir, tamEsq = tam;
+    if (avl->dir != NULL){
+        tamDir += 1;
+        tamDir = auxTam (avl->dir,tamDir);
+    }
+    if (avl->esq != NULL){
+        tamEsq += 1;
+        tamEsq = auxTam (avl->esq,tamEsq);
+    }
+    if (tamDir>tamEsq){
+        return(tamDir);
+    }
+    else{
+        return(tamEsq);
+    }
 }
 
 int tamAvl (Avl* avl){
@@ -62,23 +80,6 @@ int tamAvl (Avl* avl){
        }
     return(tamEsq);
 }
-    int auxTam (Avl*avl, int tam){
-        int tamDir, tamEsq = tam;
-        if (avl->dir != NULL){
-            tamDir += 1;
-            tamDir = auxTam (avl->dir,tamDir);
-        }
-        if (avl->esq != NULL){
-            tamEsq += 1;
-            tamEsq = auxTam (avl->esq,tamEsq);
-        }
-        if (tamDir>tamEsq){
-            return(tamDir);
-        }
-        else{
-            return(tamEsq);
-        }
-    }
 
 int buscaAvl(Avl* avl, int val){
     Avl* aux = avl;
