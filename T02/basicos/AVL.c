@@ -62,8 +62,6 @@ int tamAvl (Avl* avl){
        }
     return(tamEsq);
 }
-
-
     int auxTam (Avl*avl, int tam){
         int tamDir, tamEsq = tam;
         if (avl->dir != NULL){
