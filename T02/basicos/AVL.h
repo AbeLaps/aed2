@@ -12,9 +12,9 @@ Avl * criaAvl (int val);
 
 void insereValAvl (Avl* avl, int val);
 
-void buscaAvl (Avl* avl, int val);
+int buscaAvl (Avl* avl, int val);
 
-void tamAvl (Avl * avl);
+int tamAvl (Avl * avl);
 
 void visitaAvl(Avl* avl);
 
@@ -23,4 +23,6 @@ void preFixAvl(Avl* avl);
 void posFixAvl(Avl* avl);
 
 void ordemAvl(Avl* avl);
+
+#endif
 
