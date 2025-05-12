@@ -92,3 +92,25 @@ int buscaAvl(Avl* avl, int val){
     }
 
 }
+
+void rotEsq(Avl* avl,Avl* root){
+    Avl* paiOri = avl->pai;
+
+    int flag = 0;
+    if(avl->pai->esq == avl){flag = 1;} // se 1 o no esta a esq
+    else{flag = 2;}
+    if(flag = 1){
+        paiOri->esq = avl->dir;
+        avl->dir->esq = avl;
+        avl->dir = NULL;
+        avl->pai = paiOri->esq;
+        paiOri->esq->pai = paiOri;
+        }
+    else{paiOri->dir = avl->dir;
+        avl->dir->esq = avl;
+        avl->dir = NULL;
+        avl->pai = paiOri->dir;
+        paiOri->dir->pai = paiOri;
+        }
+    return;
+}
