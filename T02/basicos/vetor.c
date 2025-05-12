@@ -1,9 +1,12 @@
 /*operacoes do vetor aqui */
+#ifndef vetor_C
+#define vetor_C
+
+
 #include "vetor.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
 #include <math.h>
 
 
@@ -213,3 +216,5 @@ float calcularDPVetor (tipoVetor v) {
     
     return sqrt(soma_dif_quad / v.tam);
 }
+
+#endif
