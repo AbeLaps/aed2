@@ -9,7 +9,7 @@ typedef struct Avl {
     int fb;
 }Avl;
 
-Avl * criaAvl (int val); 
+Avl* criaAvl(int val, Avl *pai); 
 
 void insereValAvl (Avl* avl, int val);
 
@@ -24,6 +24,14 @@ void preFixAvl(Avl* avl);
 void posFixAvl(Avl* avl);
 
 void ordemAvl(Avl* avl);
+
+void rotEsq(Avl * avl);
+
+void rotDir(Avl * avl);
+
+void rotDuplaDirEsq(Avl * avl);
+
+void rotDuplaEsqDir(Avl * avl);
 
 #endif
 
