@@ -75,7 +75,7 @@ int tamAvl (Avl* avl){
     if (avl == NULL){
         return(-1);
     }    
-    int tamEsq,tamDir = 0;
+    int tamEsq = 0,tamDir = 0;
     Avl* auxDir = avl->dir; 
     Avl* auxEsq = avl->esq;
     tamDir = auxTam(auxDir,tamDir);
@@ -259,4 +259,3 @@ void insereValAvl(Avl** avl, int val) {
         no_atual = novo_pai;
     }
 }
-
