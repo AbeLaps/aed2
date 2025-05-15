@@ -1,18 +1,19 @@
-#ifndef AVL_H
-#define AVL_H
-
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef avl_H
+#define avl_H
 
 typedef struct Avl {
     int info;
-    struct Avl *esq;
-    struct Avl *dir;
-    struct Avl *pai;
+    struct Avl* esq;
+    struct Avl* dir;
+    struct Avl* pai;
     int fb;
-} Avl;
+}Avl;
 
-Avl* criaAvl(int val, Avl *pai);
+Avl* criaAvl(int val, Avl *pai); 
+
+void insereValAvl (Avl** avl, int val);
+
+int buscaAvl (Avl* avl, int val);
 
 int tamAvl (Avl * avl);
 
@@ -24,22 +25,18 @@ void posFixAvl(Avl* avl);
 
 void ordemAvl(Avl* avl);
 
-void insereValAvl(Avl** raiz, int val);
+void rotEsq(Avl * avl);
 
-int buscaAvl(Avl* avl, int val);
+void rotDir(Avl * avl);
 
-int altura(Avl *no);
+void rotDuplaDirEsq(Avl * avl);
 
-int calcularFB(Avl *avl);
+void rotDuplaEsqDir(Avl * avl);
+
+int altura(Avl *avl);
 
 void calcularFBdaArvore(Avl *avl);
 
-void rotEsq(Avl *avl);
 
-void rotDir(Avl *avl);
 
-void rotDuplaDirEsq(Avl *avl);
-
-void rotDuplaEsqDir(Avl *avl);
-
-#endif // AVL_H
+#endif
