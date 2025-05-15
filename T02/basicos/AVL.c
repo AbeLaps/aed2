@@ -5,14 +5,17 @@
 
 
 
-Avl* criaAvl(int val){
+Avl* criaAvl(int val, Avl *pai){
     Avl *avl;
     avl = (Avl*) malloc(sizeof(Avl));
  avl->esq = NULL;
     avl->dir = NULL;
     avl->info = val;
+    avl->pai = pai;
     return avl;
 }
+
+// encaminhamentos:
 
 void visitaAvl (Avl * avl){
     printf("%d ",avl->info);
@@ -28,7 +31,7 @@ void preFixAvl(Avl* avl){
     return;
 }
 
-void posFix(Avl* avl){
+void posFixAvl(Avl* avl){
     if(!avl){
     posFix(avl->esq);
     posFix(avl->dir);
@@ -38,18 +41,19 @@ void posFix(Avl* avl){
     return;
 }
 
-void OrdemAvl(Avl* avl){
+void ordemAvl(Avl* avl){
     if(avl != NULL){
-    OrdemAvl(avl->esq);
+    ordemAvl(avl->esq);
     visitaAvl(avl);
-    OrdemAvl(avl->dir);
+    ordemAvl(avl->dir);
     }
 
     return;
 }
 
+//funcoes para calcular a altura de uma avl
 int auxTam (Avl*avl, int tam){
-    int tamDir, tamEsq = tam;
+    int tamDir = tam, tamEsq = tam;
     if (avl->dir != NULL){
         tamDir += 1;
         tamDir = auxTam (avl->dir,tamDir);
@@ -67,7 +71,7 @@ int auxTam (Avl*avl, int tam){
 }
 
 int tamAvl (Avl* avl){
-    if (avl ==NULL){
+    if (avl == NULL){
         return(-1);
     }    
     int tamEsq,tamDir = 0;
@@ -81,20 +85,26 @@ int tamAvl (Avl* avl){
     return(tamEsq);
 }
 
-int buscaAvl(Avl* avl, int val){
+// busca um no
+Avl* buscaAvl(Avl* avl, int val){
     Avl* aux = avl;
     while (aux->dir != NULL && aux->esq != NULL){
         if (aux->info > val){
+            if(aux->dir == NULL){return aux;}
             aux = aux->dir;
         }
-        if (aux->info <val){
+        else if (aux->info <val){
+            if(aux->esq == NULL){return aux;}
             aux = aux->esq;
         }
+        else if(aux->info == val){return aux;}
     }
+    
 
 }
 
-void rotEsq(Avl* avl,Avl* root){
+// rotações:
+void rotEsq(Avl * avl){
     Avl* paiOri = avl->pai;
 
     int flag = 0;
@@ -107,11 +117,79 @@ void rotEsq(Avl* avl,Avl* root){
         avl->pai = paiOri->esq;
         paiOri->esq->pai = paiOri;
         }
-    else{paiOri->dir = avl->dir;
+    else{
+        paiOri->dir = avl->dir;
         avl->dir->esq = avl;
         avl->dir = NULL;
         avl->pai = paiOri->dir;
         paiOri->dir->pai = paiOri;
         }
     return;
+}
+
+void rotDir(Avl * avl){
+    Avl* paiOri = avl->pai;
+
+    int flag = 0;
+    if(avl->pai->esq == avl){flag = 1;} // se 1 o no esta a esq
+    else{flag = 2;}
+    if(flag = 1){
+        paiOri->esq = avl->dir;
+        avl->dir->esq = avl;
+        avl->dir = NULL;
+        avl->pai = paiOri->esq;
+        paiOri->esq->pai = paiOri;
+        }
+    else{
+        paiOri->dir = avl->esq;
+        avl->esq->dir = avl;
+        avl->esq = NULL;
+        avl->pai = paiOri->dir;
+        paiOri->dir->pai = paiOri;
+        }
+    return;
+}
+
+void rotDuplaDirEsq(Avl * avl){
+    rotEsq(avl);
+    rotDir(avl->pai);
+}
+
+void rotDuplaEsqDir(Avl * avl){
+    rotDir(avl);
+    rotEsq(avl->pai);
+}
+
+void insereValAvl(Avl * avl, int val){
+    
+
+
+    calcularFBdaArvore(avl);
+    return;
+}
+
+// funcoes para calcular o fb de todos os nós da arvore
+int altura(Avl *no) {
+    if (no == NULL) {
+        return -1;
+    }
+    int alturaEsq = altura(no->esq);
+    int alturaDir = altura(no->dir);
+    return 1 + (alturaEsq > alturaDir ? alturaEsq : alturaDir);
+}
+
+// Função para calcular o fator de balanceamento de um nó unico
+int calcularFB(Avl * avl) {
+    if (avl == NULL) {
+        return 0; 
+    }
+    return altura(avl->esq) - altura(avl->dir);
+}
+
+void calcularFBdaArvore(Avl * avl) {
+    if (avl != NULL) {
+        avl->fb = calcularFB(avl);
+        calcularFBdaArvore(avl->esq);
+        calcularFBdaArvore(avl->dir);
+    }
 }
