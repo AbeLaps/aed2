@@ -1,6 +1,8 @@
 #ifndef avl_H
 #define avl_H
 
+#include "AVL.h"
+
 typedef struct Avl {
     int info;
     struct Avl* esq;
@@ -9,7 +11,9 @@ typedef struct Avl {
     int fb;
 }Avl;
 
-Avl* criaAvl(int val, Avl *pai); 
+Avl* criaAvl(int val, Avl *pai);
+ 
+void liberaAvl(Avl* avl);
 
 void insereValAvl (Avl** avl, int val);
 
@@ -36,7 +40,5 @@ void rotDuplaEsqDir(Avl * avl);
 int altura(Avl *avl);
 
 void calcularFBdaArvore(Avl *avl);
-
-
 
 #endif
