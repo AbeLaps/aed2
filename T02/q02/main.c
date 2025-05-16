@@ -3,8 +3,7 @@
 #include <time.h>
 #include "pacote.h"
 
-
-void simularChegadaDePacotes(ArvPacote* arvore, int totalPacotes, float probabilidadeRetransmissao) {
+void simularChegadaDePacotes(ArvPacote** arvore, int totalPacotes, float probabilidadeRetransmissao) {
     srand(time(NULL));
 
     for (int i = 0; i < totalPacotes; i++) {
@@ -16,7 +15,7 @@ void simularChegadaDePacotes(ArvPacote* arvore, int totalPacotes, float probabil
             printf("Retransmissão do pacote: %d\n", pacote);
         } else {
             printf("Chegada do pacote: %d\n", pacote);
-            arvore = inserePacote(arvore, pacote, nome);
+            arvore = inserePacote(*arvore, pacote, nome);
         }
     }
 }
@@ -32,10 +31,10 @@ void salvarEmArquivo(ArvPacote* arvore, FILE* arquivo) {
 
 int main() {
     ArvPacote* arvore = NULL;
-    int totalPacotes = 10;
+    int totalPacotes = 100;
     float probabilidadeRetransmissao = 0.2;
 
-    simularChegadaDePacotes(arvore, totalPacotes, probabilidadeRetransmissao);
+    simularChegadaDePacotes(&arvore, totalPacotes, probabilidadeRetransmissao);
 
     printf("Exibindo pacotes na ordem pré-fixada:\n");
     ordenaArquivo(arvore, stdout);
