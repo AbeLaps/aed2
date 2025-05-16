@@ -6,7 +6,7 @@
 #include <time.h>
 #include "ABP.h"
 #include "vetor.h"
-#include "vetor.c"
+
 
 Arv* criaArv(int val){
     Arv *arv;
@@ -53,6 +53,24 @@ void inFix(Arv* arv){
     return;
 }
 
+int auxTam (Arv* arv, int tam){
+    int tamDir = 0, tamEsq = tam;
+    if (arv->dir != NULL){
+        tamDir += 1;
+        tamDir = auxTam (arv->dir,tamDir);
+    }
+    if (arv->esq != NULL){
+        tamEsq += 1;
+        tamEsq = auxTam (arv->esq,tamEsq);
+    }
+    if (tamDir>tamEsq){
+        return(tamDir);
+    }
+    else{
+        return(tamEsq);
+    }
+}
+
 int tamArv (Arv* arv){
         if (arv ==NULL){
             return(-1);
@@ -66,26 +84,7 @@ int tamArv (Arv* arv){
             return(tamDir);
            }
         return(tamEsq);
-    }
-    
-    int auxTam (Arv* arv, int tam){
-        int tamDir, tamEsq = tam;
-        if (arv->dir != NULL){
-            tamDir += 1;
-            tamDir = auxTam (arv->dir,tamDir);
-        }
-        if (arv->esq != NULL){
-            tamEsq += 1;
-            tamEsq = auxTam (arv->esq,tamEsq);
-        }
-        if (tamDir>tamEsq){
-            return(tamDir);
-        }
-        else{
-            return(tamEsq);
-        }
-    }
-
+}
 
 void insereValArv(Arv* arv, int val){
     Arv* aux = arv;
@@ -135,6 +134,24 @@ void popularArvVet(Arv* arv, tipoVetor *vet){
     pegaMeio(arv, vet, vet->tam/2 + 1,vet->tam);
 }
 
+void pegaMeioN(Arv* arv, int vet[], int ini, int fim){
+    if (ini > fim){ return; } 
+    int i = ini;
+    int j = fim;
+    int meio = (i+j)/2;
+    insereValArv(arv, vet[meio]);
+    pegaMeioN(arv, vet, ini, meio - 1);
+    pegaMeioN(arv, vet, meio + 1, fim);
+    return;
+}
+
+void popularArvVetN(Arv* arv, int vet[], int tam){
+    if(vet == NULL){return;}
+    insereValArv(arv,vet[tam/2]);
+    pegaMeioN(arv, vet, 0, vet[tam/2] - 1);
+    pegaMeioN(arv, vet, vet[tam/2] + 1, vet[tam]);
+}
+
 Arv* buscaABP(Arv* arv, int chave){
     if (arv == NULL || arv->info == chave) {
         return arv;
@@ -144,6 +161,14 @@ Arv* buscaABP(Arv* arv, int chave){
     }
     else {
         return buscaABP(arv->esq, chave);
+    }
+}
+
+void liberarArvoreABP(Arv* raiz) {
+    if (raiz != NULL) {
+        liberarArvoreABP(raiz->esq);
+        liberarArvoreABP(raiz->dir);
+        free(raiz);
     }
 }
 #endif
