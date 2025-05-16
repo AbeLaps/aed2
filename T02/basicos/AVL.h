@@ -1,7 +1,8 @@
-#ifndef avl_H
-#define avl_H
+#ifndef AVL_H
+#define AVL_H
 
-#include "AVL.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct Avl {
     int info;
@@ -9,36 +10,38 @@ typedef struct Avl {
     struct Avl* dir;
     struct Avl* pai;
     int fb;
-}Avl;
+} Avl;
 
-Avl* criaAvl(int val, Avl *pai);
- 
-void liberaAvl(Avl* avl);
+// Cria um novo nó
+Avl* criarAvl(int valor);
 
-void insereValAvl (Avl** avl, int val);
+// Retorna a altura da árvore
+int alturaAvl(Avl* no);
 
-int buscaAvl (Avl* avl, int val);
+// Retorna o máximo entre dois inteiros
+int max(int a, int b);
 
-int tamAvl (Avl * avl);
+// Atualiza o fator de balanceamento de um nó
+void atualizarFB(Avl* no);
 
-void visitaAvl(Avl* avl);
+// Rotação à esquerda
+Avl* rotacaoEsquerda(Avl* no);
 
-void preFixAvl(Avl* avl);
+// Rotação à direita
+Avl* rotacaoDireita(Avl* no);
 
-void posFixAvl(Avl* avl);
+// Balanceia a árvore
+Avl* balancear(Avl* no);
 
-void ordemAvl(Avl* avl);
+// Insere um valor na árvore
+Avl* inserirAvl(Avl* raiz, int valor);
 
-void rotEsq(Avl * avl);
+// Percorre a árvore em ordem
+void emOrdem(Avl* raiz);
 
-void rotDir(Avl * avl);
+// Libera a memória da árvore
+void liberarArvoreAvl(Avl* raiz);
 
-void rotDuplaDirEsq(Avl * avl);
+void buscaAvl(Avl* raiz, int chave);
 
-void rotDuplaEsqDir(Avl * avl);
-
-int altura(Avl *avl);
-
-void calcularFBdaArvore(Avl *avl);
-
-#endif
+#endif // AVL_H
