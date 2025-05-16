@@ -1,0 +1,53 @@
+=== RESULTADOS ===
+
+=== INSERCAO ===
+Tempo medio de insercao ABP: 1.668000 segundos
+Tempo medio de insercao AVL: 30.514300 segundos
+Altura media ABP: 184
+Altura media AVL: 20
+
+=== BUSCA ===
+Tempo medio de busca ABP (30 buscas): 87.176000 segundos
+Tempo medio de busca AVL (30 buscas): 3.080000 segundos
+
+=== DETALHES POR EXECUCAO ===
+
+Execucao 1:
+  ABP - Tempo insercao: 3.065000 s, Altura: 231
+  AVL - Tempo insercao: 115.396000 s, Altura: 21
+
+Execucao 2:
+  ABP - Tempo insercao: 1.5066000 s, Altura: 138
+  AVL - Tempo insercao: 119.810000 s, Altura: 20
+
+Execucao 3:
+  ABP - Tempo insercao: 2.064000 s, Altura: 220
+  AVL - Tempo insercao: 118.950000 s, Altura: 20
+
+Execucao 4:
+  ABP - Tempo insercao: 1.970000 s, Altura: 194
+  AVL - Tempo insercao: 118.148000 s, Altura: 20
+
+Execucao 5:
+  ABP - Tempo insercao: 0.163000 s, Altura: 59
+  AVL - Tempo insercao: 124.132000 s, Altura: 20
+
+Execucao 6:
+  ABP - Tempo insercao: 0.764000 s, Altura: 185
+  AVL - Tempo insercao: 123.979000 s, Altura: 20
+
+Execucao 7:
+  ABP - Tempo insercao: 2.85000 s, Altura: 231
+  AVL - Tempo insercao: 121.735000 s, Altura: 20
+
+Execucao 8:
+  ABP - Tempo insercao: 0.68000 s, Altura: 268
+  AVL - Tempo insercao: 124.514000 s, Altura: 19
+
+Execucao 9:
+  ABP - Tempo insercao: 3.065000 s, Altura: 271
+  AVL - Tempo insercao: 120.622000 s, Altura: 19
+
+Execucao 10:
+  ABP - Tempo insercao: 0.070000 s, Altura: 43
+  AVL - Tempo insercao: 117.857000 s, Altura: 20
