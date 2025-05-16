@@ -29,7 +29,7 @@ int main() {
         clock_t fim = clock();
         tempo_criacao[i] = (double)(fim - inicio) / CLOCKS_PER_SEC;
         alturas[i] = altura(arvore);
-        printf("arvore %d: Tempo de criação = %.4f segundos, Altura = %d\n", i + 1, tempo_criacao[i], alturas[i]);
+        printf("arvore %d: Tempo de criacao = %.4f segundos, Altura = %d\n", i + 1, tempo_criacao[i], alturas[i]);
      }
 
     printf("\n--- Busca nas arvores AVL ---\n");
