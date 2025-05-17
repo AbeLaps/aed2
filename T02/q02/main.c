@@ -7,19 +7,19 @@ void simularChegadaDePacotes(ArvPacote** arvore, int totalPacotes, float probabi
     srand(time(NULL));
 
     for (int i = 0; i < totalPacotes; i++) {
-        int pacote = rand() % 100;
-        char nome[100];
+    int pacote = i;
+    char nome[100];
 
-        if (rand() % 100 < probabilidadeRetransmissao * 100) {
-            printf("Retransmissão do pacote: %d\n", pacote);
-            snprintf(nome, sizeof(nome), "Pacote-%d (Retransmissão)", pacote);
-        } else {
-            printf("Chegada do pacote: %d\n", pacote);
-            snprintf(nome, sizeof(nome), "Pacote-%d", pacote);
-        }
-
-        *arvore = inserePacote(*arvore, pacote, nome);
+    if (rand() % 100 < probabilidadeRetransmissao * 100) {
+        printf("Retransmissão do pacote: %d\n", pacote);
+        snprintf(nome, sizeof(nome), "Pacote-%d (Retransmissão)", pacote);
+    } else {
+        printf("Chegada do pacote: %d\n", pacote);
+        snprintf(nome, sizeof(nome), "Pacote-%d", pacote);
     }
+
+    *arvore = inserePacote(*arvore, pacote, nome);
+}
 }
 
 void salvarEmArquivo(ArvPacote* arvore, FILE* arquivo) {
