@@ -15,18 +15,20 @@ ArvPacote* criaPacote (int num, char * nome){
     return no;
 }
 
-ArvPacote* inserePacote(ArvPacote *no, int num, char * nome){
-    if (no == NULL){
+ArvPacote* inserePacote(ArvPacote *no, int num, char * nome) {
+    if (no == NULL) {
         return criaPacote(num, nome);
     }
-    if (num < no->pacote->id){
-        no->esq = inserePacote (no->esq, num, nome);
-    }
-    else if (num > no->pacote->id){
+    if (num < no->pacote->id) {
+        no->esq = inserePacote(no->esq, num, nome);
+    } else if (num > no->pacote->id) {
         no->dir = inserePacote(no->dir, num, nome);
+    } else {
+        strcpy(no->pacote->dado, nome);
     }
     return no;
 }
+
 
 void ordenaArquivo(ArvPacote* no, FILE* f) {
     if (no == NULL) {
