@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ABP.h"
-#include "ABP.c"
 #include "pacote.h"
 
-ArvPacote* criaPacote (int num, char * nome){
+ArvPacote* criaPacote(int num, char *nome) {
     ArvPacote* no = (ArvPacote*) malloc(sizeof(ArvPacote));
     Pacote* p = (Pacote*) malloc(sizeof(Pacote));
     p->id = num;
@@ -15,7 +13,7 @@ ArvPacote* criaPacote (int num, char * nome){
     return no;
 }
 
-ArvPacote* inserePacote(ArvPacote *no, int num, char * nome) {
+ArvPacote* inserePacote(ArvPacote *no, int num, char *nome) {
     if (no == NULL) {
         return criaPacote(num, nome);
     }
@@ -24,11 +22,10 @@ ArvPacote* inserePacote(ArvPacote *no, int num, char * nome) {
     } else if (num > no->pacote->id) {
         no->dir = inserePacote(no->dir, num, nome);
     } else {
-        strcpy(no->pacote->dado, nome);
+        strcpy(no->pacote->dado, nome); // Atualiza o dado se o ID já existe
     }
     return no;
 }
-
 
 void ordenaArquivo(ArvPacote* no, FILE* f) {
     if (no == NULL) {

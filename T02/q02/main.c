@@ -15,11 +15,10 @@ void simularChegadaDePacotes(ArvPacote** arvore, int totalPacotes, float probabi
             printf("Retransmissão do pacote: %d\n", pacote);
         } else {
             printf("Chegada do pacote: %d\n", pacote);
-            *arvore = inserePacote(*arvore, pacote, nome); //
+            *arvore = inserePacote(*arvore, pacote, nome);
         }
     }
 }
-
 
 void salvarEmArquivo(ArvPacote* arvore, FILE* arquivo) {
     if (arvore != NULL) {
@@ -29,7 +28,6 @@ void salvarEmArquivo(ArvPacote* arvore, FILE* arquivo) {
     }
 }
 
-
 int main() {
     ArvPacote* arvore = NULL;
     int totalPacotes = 100;
@@ -37,14 +35,14 @@ int main() {
 
     simularChegadaDePacotes(&arvore, totalPacotes, probabilidadeRetransmissao);
 
-    printf("Exibindo pacotes na ordem pré-fixada:\n");
+    printf("Exibindo pacotes em ordem:\n");
     ordenaArquivo(arvore, stdout);
 
     FILE* arquivo = fopen("pacotes_recebidos.txt", "w");
     if (arquivo != NULL) {
         salvarEmArquivo(arvore, arquivo);
         fclose(arquivo);
-        printf("Arquivo criado.\n");
+        printf("Arquivo com pacotes criado com sucesso.\n");
     } else {
         printf("Erro ao criar o arquivo.\n");
     }
