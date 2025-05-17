@@ -22,7 +22,7 @@ ArvPacote* inserePacote(ArvPacote *no, int num, char *nome) {
     } else if (num > no->pacote->id) {
         no->dir = inserePacote(no->dir, num, nome);
     } else {
-        strcpy(no->pacote->dado, nome); // Atualiza o dado se o ID já existe
+        strcpy(no->pacote->dado, nome);
     }
     return no;
 }
