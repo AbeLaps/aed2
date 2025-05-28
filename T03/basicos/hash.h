@@ -1,14 +1,12 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include "abp.h"
 
-
-typedef struct item{
+typedef struct tipoItem{
   long int cpf;
   unsigned int idade;
   int agencia;
   char nome[65];
   char email[25];
-}item;
+}tipoItem;
 
 
 typedef struct hashItem{
@@ -16,4 +14,3 @@ typedef struct hashItem{
   unsigned int index;
   long int cpf;
 }hashItem;
-
