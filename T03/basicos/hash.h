@@ -3,7 +3,7 @@
 
 
 typedef struct item{
-  int cpf;
+  long int cpf;
   unsigned int idade;
   int agencia;
   char nome[65];
@@ -14,8 +14,6 @@ typedef struct item{
 typedef struct hashItem{
   struct hashItem * prox;
   unsigned int index;
+  long int cpf;
 }hashItem;
 
-typedef struct hashTable{
- hashItem* vet[10000];
-}hashTable;
