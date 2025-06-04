@@ -1,16 +1,17 @@
 #ifndef ABP_H
 #define ABP_H
 
+#include "hash.h"
 //#include "vetor.h"
 
 typedef struct Arv{
-    int info;
+    tipoItem item;
     struct Arv* esq;
     struct Arv* dir;
     
 } Arv ;
 
-Arv* criaArv(int val);
+Arv* criaArv(tipoItem val);
 
 void visita(Arv* arv);
 
@@ -22,7 +23,7 @@ void inFix(Arv* arv);
 
 int tamArv(Arv* arv);
 
-void insereValArv(Arv* arv, int val);
+void insereValArv(Arv* arv, tipoItem val);
 
 void popularArvRand(Arv* arv, int tam);
 
