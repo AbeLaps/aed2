@@ -4,7 +4,7 @@ int hashFunc(long int cpf){
     return ind;
 }
 
-void criaHashItem(hashItem * itemHash, tipoItem item, unsigned int index){
+void criarHashItem(hashItem * itemHash, tipoItem item, unsigned int index){
     itemhash->index = index;
     itemHash->prox = NULL;
     itemHash->cpf = item.cpf;
@@ -28,4 +28,11 @@ void inserirHash(hashItem hash[],tipoItem item){
     if(hash[ind]!= NULL){
         hash[ind]->prox
     }
+}
+
+
+void EscreverNoArquivo (hashItem *item, FILE *fp,int * pos){
+    fwrite(&item,sizeof(item),1,fp);
+    *pos = *pos +1;
+    item->index = pos; 
 }
