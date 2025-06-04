@@ -31,8 +31,9 @@ void inserirHash(hashItem hash[],tipoItem item){
 }
 
 
-void EscreverNoArquivo (hashItem *item, FILE *fp,int * pos){
-    fwrite(&item,sizeof(item),1,fp);
-    *pos = *pos +1;
-    item->index = pos; 
-}
+int EscreverNoArquivo (hashItem *item, FILE *fp,int *pos){
+    item->index = *pos;
+    fseek(fp, *pos * sizeof(item), 0);
+    fwrite(&item,sizeof(item),1,fp);     
+    *pos += 1;
+} 
