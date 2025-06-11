@@ -1,39 +1,63 @@
+#include "hash.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "ABP.h"
 
-int hashFunc(long int cpf){
-    int ind = (cpf * 31) % tam;
-    return ind;
+#define tam 100
+
+int hashFunc(long int cpf) {
+    return (cpf * 31) % tam;
 }
 
-void criarHashItem(hashItem * itemHash, tipoItem item, unsigned int index){
-    itemhash->index = index;
-    itemHash->prox = NULL;
-    itemHash->cpf = item.cpf;
-    return ;
+void criaHashItem(hashItem **itemHash, tipoItem item, unsigned int index) {
+    *itemHash = (hashItem *)malloc(sizeof(hashItem));
+    (*itemHash)->index = index;
+    (*itemHash)->prox = NULL;
+    (*itemHash)->cpf = item.cpf;
 }
 
-void popularSistema(FILE * arq, ABP * arv, hashItem hash[]){
-/*inserir no arquivpo
-    pegar o index do registro
-inserir no hash com o indicde do arquivo
-    fazer hash func com o cpf 
-    pegar indice do hash
-    inserir no hash propriamente dito com o cpf,index,verificador de colisao
-inserir na arv abp
-*/
-}
+void inserirHash(hashItem hash[], tipoItem item) {
+    int ind = hashFunc(item.cpf);  // calcula o índice usando o CPF
+    hashItem *novoItem;
+    criaHashItem(&novoItem, item, ind);
 
-void inserirHash(hashItem hash[],tipoItem item){
-    int ind = hashFunc(item.cpf);
-    criaHashItem
-    if(hash[ind]!= NULL){
-        hash[ind]->prox
+    // encadeamento caso já tenha um objeto posicionado
+    if (hash[ind] != NULL) {
+        novoItem->prox = hash[ind];
+        hash[ind] = novoItem;
+    } else {
+        hash[ind] = novoItem;  // caso contrário, simplesmente coloca na posição
     }
 }
 
+hashItem* buscaHash(hashItem hash[], long int cpf) {
+    int ind = hashFunc(cpf);
+    hashItem *aux = hash[ind];
 
-int EscreverNoArquivo (hashItem *item, FILE *fp,int *pos){
+    // percorre a lista encadeada até encontrar o CPF ou chegar ao final
+    while (aux != NULL) {
+        if (aux->cpf == cpf) {
+            return aux;
+        }
+        aux = aux->prox;
+    }
+    return NULL;
+}
+
+int EscreverNoArquivo(hashItem *item, FILE *fp, int *pos) {
     item->index = *pos;
-    fseek(fp, *pos * sizeof(item), 0);
-    fwrite(&item,sizeof(item),1,fp);     
+    fseek(fp, *pos * sizeof(hashItem), SEEK_SET);
+    fwrite(item, sizeof(hashItem), 1, fp);
     *pos += 1;
-} 
+    return 0;
+}
+
+void popularSistema(FILE *arq, Arv *arv, hashItem hash[]) {
+    tipoItem item;
+    int pos = 0;
+    while (fread(&item, sizeof(tipoItem), 1, arq)) {
+        insereValArv(arv, item.cpf);
+        inserirHash(hash, item);
+        pos++;
+    }
+}
