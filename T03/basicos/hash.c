@@ -5,43 +5,52 @@
 
 #define tam 100
 
+hashItem NULO = {NULL, 0, -1};
+
 int hashFunc(long int cpf) {
-    return (cpf * 31) % tam;
+    return (cpf * 10007) % tam;
 }
 
-void criaHashItem(hashItem **itemHash, tipoItem item, unsigned int index) {
-    *itemHash = (hashItem *)malloc(sizeof(hashItem));
-    (*itemHash)->index = index;
-    (*itemHash)->prox = NULL;
-    (*itemHash)->cpf = item.cpf;
+void criaHashItem(hashItem *itemHash, tipoItem item, unsigned int index) {
+    itemHash->index = index;
+    itemHash->prox = NULL;
+    itemHash->cpf = item.cpf;
+}
+
+//hashItem hash[10000]
+
+void limpaHash(hashItem hash[]){
+    for(int i = 0; i < 10000; i++){
+    hash[i] = NULO;
+    }
 }
 
 void inserirHash(hashItem hash[], tipoItem item) {
     int ind = hashFunc(item.cpf);  // calcula o índice usando o CPF
-    hashItem *novoItem;
+    hashItem novoItem;
     criaHashItem(&novoItem, item, ind);
 
     // encadeamento caso já tenha um objeto posicionado
-    if (hash[ind] != NULL) {
-        novoItem->prox = hash[ind];
+    if (hash[ind].cpf != -1 ) {
+        novoItem.prox = &hash[ind];
         hash[ind] = novoItem;
     } else {
         hash[ind] = novoItem;  // caso contrário, simplesmente coloca na posição
     }
 }
 
-hashItem* buscaHash(hashItem hash[], long int cpf) {
+hashItem buscaHash(hashItem hash[], long int cpf) {
     int ind = hashFunc(cpf);
-    hashItem *aux = hash[ind];
+    hashItem aux = hash[ind];
 
     // percorre a lista encadeada até encontrar o CPF ou chegar ao final
-    while (aux != NULL) {
-        if (aux->cpf == cpf) {
+    while (aux.cpf != -1) {
+        if (aux.cpf == cpf) {
             return aux;
         }
-        aux = aux->prox;
+        aux = *(aux.prox);
     }
-    return NULL;
+    return NULO;
 }
 
 int EscreverNoArquivo(hashItem *item, FILE *fp, int *pos) {
