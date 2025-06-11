@@ -209,4 +209,15 @@ float calcularDPVetor (tipoVetor v) {
     return sqrt(soma_dif_quad / v.tam);
 }
 
+float calcularMedia(tipoVetor v){
+    float soma = 0;
+
+    for (int i = 0; i < v.tam; i++) {
+        soma += v.vet[i];
+    }
+
+    float media = soma / v.tam;
+    return media;
+}
+#endif
 #endif
