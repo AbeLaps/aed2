@@ -20,6 +20,7 @@ void copiaVetor(tipoVetor * v, tipoVetor * v1);
 void preencheVetor(tipoVetor *v);
 void preencheVetorOrdenado(tipoVetor *v);
 float calcularDPVetor(tipoVetor v);
+float calcularMedia(tipoVetor v);
 void printaVetor(tipoVetor *v);
 int buscaSeqVetor(tipoVetor v, unsigned int chave);
 int buscaBin(tipoVetor v, unsigned int chave);
