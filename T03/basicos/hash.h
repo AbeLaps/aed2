@@ -1,7 +1,8 @@
 #ifndef HASH_H
 #define HASH_H
 
-#include "ABP.h"
+#include "abp.h"
+#include <stdio.h>
 
 typedef struct hashItem {
     struct hashItem *prox;
@@ -10,10 +11,10 @@ typedef struct hashItem {
 } hashItem;
 
 int hashFunc(long int cpf);
-void criaHashItem(hashItem **itemHash, tipoItem item, unsigned int index);
-void inserirHash(hashItem hash[], tipoItem item);
-hashItem* buscaHash(hashItem hash[], long int cpf);
-int EscreverNoArquivo(hashItem *item, FILE *fp, int *pos);
-void popularSistema(FILE *arq, Arv *arv, hashItem hash[]);
+void criaHashItem(hashItem *itemHash, tipoItem item, unsigned int indexArq);
+void inicializaHash(hashItem hash[]);
+void inserirHash(hashItem hash[], tipoItem item,int indArq);
+hashItem buscaHash(hashItem hash[], long int cpf);
+void popularSistema(FILE *arq, Abp *arv, hashItem hash[]);
 
 #endif
