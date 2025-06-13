@@ -15,6 +15,7 @@ void criaHashItem(hashItem *itemHash, tipoItem item, unsigned int indexArq);
 void inicializaHash(hashItem hash[]);
 void inserirHash(hashItem hash[], tipoItem item,int indArq);
 hashItem buscaHash(hashItem hash[], long int cpf);
+//int EscreverNoArquivo(hashItem *item, FILE *fp, int *pos);
 void popularSistema(FILE *arq, Abp *arv, hashItem hash[]);
 
 #endif
