@@ -1,34 +1,33 @@
 #include "hash.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "ABP.h"
+#include "abp.h"
 
 #define tam 100
 
-hashItem NULO = {NULL, 0, -1};
+int posicaoInsert = 0;
+hashItem hashNULO = {NULL, 0, -1};
 
 int hashFunc(long int cpf) {
     return (cpf * 10007) % tam;
 }
 
-void criaHashItem(hashItem *itemHash, tipoItem item, unsigned int index) {
-    itemHash->index = index;
+void criaHashItem(hashItem *itemHash, tipoItem item, unsigned int indexArq) {
+    itemHash->index = indexArq;
     itemHash->prox = NULL;
     itemHash->cpf = item.cpf;
 }
 
-//hashItem hash[10000]
-
-void limpaHash(hashItem hash[]){
+void inicializaHash(hashItem hash[]){
     for(int i = 0; i < 10000; i++){
-    hash[i] = NULO;
+    hash[i] = hashNULO;
     }
 }
 
-void inserirHash(hashItem hash[], tipoItem item) {
+void inserirHash(hashItem hash[], tipoItem item,int indArq) {
     int ind = hashFunc(item.cpf);  // calcula o índice usando o CPF
     hashItem novoItem;
-    criaHashItem(&novoItem, item, ind);
+    criaHashItem(&novoItem, item, indArq);
 
     // encadeamento caso já tenha um objeto posicionado
     if (hash[ind].cpf != -1 ) {
@@ -50,23 +49,16 @@ hashItem buscaHash(hashItem hash[], long int cpf) {
         }
         aux = *(aux.prox);
     }
-    return NULO;
+    return hashNULO;
 }
 
-int EscreverNoArquivo(hashItem *item, FILE *fp, int *pos) {
-    item->index = *pos;
-    fseek(fp, *pos * sizeof(hashItem), SEEK_SET);
-    fwrite(item, sizeof(hashItem), 1, fp);
-    *pos += 1;
-    return 0;
-}
-
-void popularSistema(FILE *arq, Arv *arv, hashItem hash[]) {
+void popularSistema(FILE *arq, Abp *arv, hashItem hash[]){
     tipoItem item;
-    int pos = 0;
-    while (fread(&item, sizeof(tipoItem), 1, arq)) {
-        insereValArv(arv, item.cpf);
-        inserirHash(hash, item);
-        pos++;
+    int posArq = 0;
+    while(fread(&item, sizeof(tipoItem), 1, arq)){
+        insereValAbp(arv, item);
+        inserirHash(hash, item, posArq);
+        posArq++;
     }
+    
 }
