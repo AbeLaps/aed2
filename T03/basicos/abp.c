@@ -4,58 +4,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "ABP.h"
+#include "abp.h"
 
-Arv* criaArv(tipoItem val){
-    Arv *arv;
-    arv = (Arv*) malloc(sizeof(Arv));
-    arv->esq = NULL;
-    arv->dir = NULL;
-    arv->item = val;  // Usando item em vez de info
-    return arv;
+Abp* criaAbp(tipoItem val){
+    Abp *Arv;
+    Arv = (Abp * ) malloc(sizeof(Abp));
+    Arv->esq = NULL;
+    Arv->dir = NULL;
+    Arv->item = val;  // Usando item em vez de info
+    return Arv;
 }
 
-void visita(Arv* arv){
-    printf("%ld ", arv->item.cpf);  // Usando item.cpf em vez de info
+void visita(Abp* Arv){
+    printf("%ld ", Arv->item.cpf);  // Usando item.cpf em vez de info
     return;
 }
 
-void preFix(Arv* arv){
-    if (arv != NULL){
-        visita(arv);
-        preFix(arv->esq);
-        preFix(arv->dir);
+void preFix(Abp* Arv){
+    if (Arv != NULL){
+        visita(Arv);
+        preFix(Arv->esq);
+        preFix(Arv->dir);
     }
     return;
 }
 
-void posFix(Arv* arv){
-    if (arv != NULL){
-        posFix(arv->esq);
-        posFix(arv->dir);
-        visita(arv);
+void posFix(Abp* Arv){
+    if (Arv != NULL){
+        posFix(Arv->esq);
+        posFix(Arv->dir);
+        visita(Arv);
     }
     return;
 }
 
-void inFix(Arv* arv){
-    if (arv != NULL){
-        inFix(arv->esq);
-        printf("%ld  ", arv->item.cpf);  // Usando item.cpf
-        inFix(arv->dir);
+void inFix(Abp* Arv){
+    if (Arv != NULL){
+        inFix(Arv->esq);
+        printf("%ld  ", Arv->item.cpf);  // Usando item.cpf
+        inFix(Arv->dir);
     }
     return;
 }
 
-int auxTam(Arv* arv, int tam){
+int auxTam(Abp* Arv, int tam){
     int tamDir = 0, tamEsq = tam;
-    if (arv->dir != NULL){
+    if (Arv->dir != NULL){
         tamDir += 1;
-        tamDir = auxTam(arv->dir, tamDir);
+        tamDir = auxTam(Arv->dir, tamDir);
     }
-    if (arv->esq != NULL){
+    if (Arv->esq != NULL){
         tamEsq += 1;
-        tamEsq = auxTam(arv->esq, tamEsq);
+        tamEsq = auxTam(Arv->esq, tamEsq);
     }
     if (tamDir > tamEsq){
         return(tamDir);
@@ -65,13 +65,13 @@ int auxTam(Arv* arv, int tam){
     }
 }
 
-int tamArv(Arv* arv){
-    if (arv == NULL){
+int tamAbp(Abp* Arv){
+    if (Arv == NULL){
         return(-1);
     }    
     int tamEsq, tamDir = 0;
-    Arv* auxDir = arv->dir; 
-    Arv* auxEsq = arv->esq;
+    Abp * auxDir = Arv->dir; 
+    Abp * auxEsq = Arv->esq;
     tamDir = auxTam(auxDir, tamDir);
     tamEsq = auxTam(auxEsq, tamEsq);
     if (tamDir > tamEsq){
@@ -80,30 +80,30 @@ int tamArv(Arv* arv){
     return(tamEsq);
 }
 
-void insereValArv(Arv* arv, tipoItem val){
-    Arv* aux = arv;
+void insereValAbp(Abp* Arv, tipoItem val){
+    Abp* aux = Arv;
     while (aux != NULL){
         if (aux->item.cpf < val.cpf){  // Usando item.cpf em vez de info
             if (aux->dir == NULL){
-                aux->dir = criaArv(val);
+                aux->dir = criaAbp(val);
                 return;
             }
             aux = aux->dir;
         }
         else{
             if (aux->esq == NULL){
-                aux->esq = criaArv(val);
+                aux->esq = criaAbp(val);
                 return;
             }
             aux = aux->esq;
         }
     }
-    printf("erro: arvore inserida == null");
+    printf("erro: Arvore inserida == null");
     return;
 }
 
-void popularArvRand(Arv* arv, int tam){
-    if (arv == NULL){ return; }
+void popularAbpRand(Abp* Arv, int tam){
+    if (Arv == NULL){ return; }
     for (int i = 0; i < tam; i++){
         tipoItem k;
         k.cpf = rand();
@@ -111,11 +111,11 @@ void popularArvRand(Arv* arv, int tam){
         k.agencia = rand() % 1000;  // Exemplo de valor aleatório para agência
         snprintf(k.nome, sizeof(k.nome), "Pessoa %d", i);  // Nome fictício
         snprintf(k.email, sizeof(k.email), "pessoa%d@email.com", i);  // Email fictício
-        insereValArv(arv, k);
+        insereValAbp(Arv, k);
     }
 }
 
-void liberarArvoreABP(Arv* raiz) {
+void liberarArvoreABP(Abp* raiz) {
     if (raiz != NULL) {
         liberarArvoreABP(raiz->esq);
         liberarArvoreABP(raiz->dir);
@@ -123,18 +123,18 @@ void liberarArvoreABP(Arv* raiz) {
     }
 }
 
-void coletaDadosArv(Arv* arv, tipoVetor *vetor, int *index) {
-    if (arv != NULL) {
-        coletaDadosArv(arv->esq, vetor, index);
-        vetor->vet[*index] = arv->item.idade;  // Coleta a idade
+void coletaDadosAbp(Abp* Arv, tipoVetor *vetor, int *index) {
+    if (Arv != NULL) {
+        coletaDadosAbp(Arv->esq, vetor, index);
+        vetor->vet[*index] = Arv->item.idade;  // Coleta a idade
         (*index)++;
-        coletaDadosArv(arv->dir, vetor, index);
+        coletaDadosAbp(Arv->dir, vetor, index);
     }
 }
 
-void calcularEstatisticas(Arv* arv, tipoVetor *vetor) {
+void calcularEstatisticas(Abp* Arv, tipoVetor *vetor) {
     int index = 0;
-    coletaDadosArv(arv, vetor, &index);
+    coletaDadosAbp(Arv, vetor, &index);
     printf("Média: %.2f\n", calcularMedia(*vetor));
     printf("Desvio Padrão: %.2f\n", calcularDPVetor(*vetor));
     quickSort(vetor);
