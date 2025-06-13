@@ -3,22 +3,22 @@
 
 #include "vetor.h"  // Incluindo vetor.h, pois vamos usar a estrutura de vetor
 
-typedef struct Arv{
+typedef struct Abp{
     tipoItem item;
-    struct Arv* esq;
-    struct Arv* dir;
-} Arv;
+    struct Abp* esq;
+    struct Abp* dir;
+} Abp;
 
-Arv* criaArv(int val);
-void visita(Arv* arv);
-void preFix(Arv* arv);
-void posFix(Arv* arv);
-void inFix(Arv* arv);
-int tamArv(Arv* arv);
-void insereValArv(Arv* arv, int val);
-void popularArvRand(Arv* arv, int tam);
-void liberarArvoreABP(Arv* raiz);
-void coletaDadosArv(Arv* arv, tipoVetor *vetor, int *index);
-void calcularEstatisticas(Arv* arv, tipoVetor *vetor);
+Abp* criaAbp(tipoItem val);
+void visita(Abp* Abp);
+void preFix(Abp* Abp);
+void posFix(Abp* Abp);
+void inFix(Abp* Abp);
+int tamAbp(Abp* Abp);
+void insereValAbp(Abp* Abp, tipoItem val);
+void popularAbpRand(Abp* Abp, int tam);
+void liberarArvoreABP(Abp* raiz);
+void coletaDadosAbp(Abp* Abp, tipoVetor *vetor, int *index);
+void calcularEstatisticas(Abp* Abp, tipoVetor *vetor);
 
 #endif
