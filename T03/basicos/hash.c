@@ -53,6 +53,7 @@ hashItem buscaHash(hashItem hash[], long int cpf) {
 }
 
 void popularSistema(FILE *arq, Abp *arv, hashItem hash[]){
+    //arq é um arquivo com todos os registros já escritos
     tipoItem item;
     int posArq = 0;
     while(fread(&item, sizeof(tipoItem), 1, arq)){
