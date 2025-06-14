@@ -6,17 +6,17 @@
 #include <time.h>
 #include "abp.h"
 
-Abp* criaAbp(tipoItem val){
+Abp* criaAbpCpf(long long int val){
     Abp *Arv;
     Arv = (Abp * ) malloc(sizeof(Abp));
     Arv->esq = NULL;
     Arv->dir = NULL;
-    Arv->item = val;  // Usando item em vez de info
+    Arv->info = val;  // Usando item em vez de info
     return Arv;
 }
 
 void visita(Abp* Arv){
-    printf("%ld ", Arv->item.cpf);  // Usando item.cpf em vez de info
+    printf("%ld ", Arv->info);  // Usando item.cpf em vez de info
     return;
 }
 
@@ -38,10 +38,28 @@ void posFix(Abp* Arv){
     return;
 }
 
+/*
+int buscaAbp(AbpCpf* arv, long long int chave) {
+    AbpCpf* atual = arv;
+    while (atual != NULL) {
+        if (chave == atual->val) {
+            return 1;  // encontrou
+        }
+        else if (chave < atual->val) {
+            atual = atual->esq;
+        }
+        else {
+            atual = atual->dir;
+        }
+    }
+    return 0;  // não encontrou
+}
+*/
+
 void inFix(Abp* Arv){
     if (Arv != NULL){
         inFix(Arv->esq);
-        printf("%ld  ", Arv->item.cpf);  // Usando item.cpf
+        printf("%ld  ", Arv->info);  // Usando item.cpf
         inFix(Arv->dir);
     }
     return;
@@ -65,7 +83,7 @@ int auxTam(Abp* Arv, int tam){
     }
 }
 
-int tamAbp(Abp* Arv){
+int tamAbpCpf(Abp* Arv){
     if (Arv == NULL){
         return(-1);
     }    
@@ -80,19 +98,19 @@ int tamAbp(Abp* Arv){
     return(tamEsq);
 }
 
-void insereValAbp(Abp* Arv, tipoItem val){
+void insereValAbpCpf(Abp* Arv, long long int val){
     Abp* aux = Arv;
     while (aux != NULL){
-        if (aux->item.cpf < val.cpf){  // Usando item.cpf em vez de info
+        if (aux->cpf < aux->cpf){  // Usando item.cpf em vez de info
             if (aux->dir == NULL){
-                aux->dir = criaAbp(val);
+                aux->dir = criaAbpCpf(val);
                 return;
             }
             aux = aux->dir;
         }
         else{
             if (aux->esq == NULL){
-                aux->esq = criaAbp(val);
+                aux->esq = criaAbpCpf(val);
                 return;
             }
             aux = aux->esq;
@@ -102,31 +120,29 @@ void insereValAbp(Abp* Arv, tipoItem val){
     return;
 }
 
-void popularAbpRand(Abp* Arv, int tam){
+void popularAbpCpfRand(Abp* Arv, int tam){
     if (Arv == NULL){ return; }
     for (int i = 0; i < tam; i++){
-        tipoItem k;
-        k.cpf = rand();
-        k.idade = rand() % 100;  // Exemplo de valor aleatório para idade
-        k.agencia = rand() % 1000;  // Exemplo de valor aleatório para agência
-        snprintf(k.nome, sizeof(k.nome), "Pessoa %d", i);  // Nome fictício
-        snprintf(k.email, sizeof(k.email), "pessoa%d@email.com", i);  // Email fictício
-        insereValAbp(Arv, k);
+        long long int k;
+        k = rand();
+        snprintf(k, sizeof(k), "Pessoa %d", i);  // Nome fictício
+        snprintf(k, sizeof(k), "pessoa%d@email.com", i);  // Email fictício
+        insereValAbpCpf(Arv, k);
     }
 }
 
-void liberarArvoreABP(Abp* raiz) {
+void liberarArvoreABPCpf(Abp* raiz) {
     if (raiz != NULL) {
-        liberarArvoreABP(raiz->esq);
-        liberarArvoreABP(raiz->dir);
+        liberarArvoreABPCpf(raiz->esq);
+        liberarArvoreABPCpf(raiz->dir);
         free(raiz);
     }
 }
 
-void coletaDadosAbp(Abp* Arv, tipoVetor *vetor, int *index) {
+void coletaDadosAbpCpf(Abp* Arv, tipoVetor *vetor, int *index) {
     if (Arv != NULL) {
         coletaDadosAbp(Arv->esq, vetor, index);
-        vetor->vet[*index] = Arv->item.idade;  // Coleta a idade
+        vetor->vet[*index] = Arv->info;  // Coleta a idade
         (*index)++;
         coletaDadosAbp(Arv->dir, vetor, index);
     }
