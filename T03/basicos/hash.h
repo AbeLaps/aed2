@@ -10,7 +10,7 @@ typedef struct hashItem {
     long int cpf;
 } hashItem;
 
-int hashFunc(long int cpf);
+int hashFunc(long long int cpf);
 void criaHashItem(hashItem *itemHash, tipoItem item, unsigned int indexArq);
 void inicializaHash(hashItem hash[]);
 void inserirHash(hashItem hash[], tipoItem item,int indArq);
