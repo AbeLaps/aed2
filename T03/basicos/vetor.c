@@ -220,4 +220,3 @@ float calcularMedia(tipoVetor v){
     return media;
 }
 #endif
-
