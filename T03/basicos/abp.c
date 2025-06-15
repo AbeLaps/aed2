@@ -11,12 +11,12 @@ Abp* criaAbp(long long int val){
     Arv = (Abp * ) malloc(sizeof(Abp));
     Arv->esq = NULL;
     Arv->dir = NULL;
-    Arv->info = val;  // Usando info
+    Arv->info = val;  
     return Arv;
 }
 
 void visita(Abp* Arv){
-    printf("%ld ", Arv->info);  // Usando info
+    printf("%ld ", Arv->info);  
     return;
 }
 
@@ -38,28 +38,56 @@ void posFix(Abp* Arv){
     return;
 }
 
-/*
+
 int buscaAbp(Abp* arv, long long int chave) {
-    AbpCpf* atual = arv;
+    Abp* atual = arv;
     while (atual != NULL) {
-        if (chave == atual->val) {
+        if (chave == atual->info) {
             return 1;  // encontrou
         }
-        else if (chave < atual->val) {
+        else if (chave < atual->info) {
             atual = atual->esq;
         }
         else {
             atual = atual->dir;
         }
     }
-    return 0;  // não encontrou
+    return 0;  // nao encontrou
 }
-*/
+
+void buscaInterAbp(Abp *raiz, long long int idadeBusca, int intervaloMin, int intervaloMax, int flag) {
+    if (raiz == NULL) return;
+
+    // Percorre a arvore esquerda
+    buscaInterAbp(raiz->esq, idadeBusca, intervaloMin, intervaloMax, flag);
+
+    // Verifica se está no intervalo
+    if (raiz->info > intervaloMin && raiz->info < intervaloMax) {
+        int condicao = 0;
+
+        switch (flag) {
+            case 1: condicao = (raiz->info < idadeBusca); break;
+            case 2: condicao = (raiz->info > idadeBusca); break;
+            case 3: condicao = (raiz->info <= idadeBusca); break;
+            case 4: condicao = (raiz->info >= idadeBusca); break;
+            default:
+                printf("Flag inválida! Use 1 (<), 2 (>), 3 (<=), 4 (>=)\n");
+                return;
+        }
+
+        if (condicao) {
+            printf("Idade: %lld\n", raiz->info);
+        }
+    }
+
+    // Percorre arvore direita
+    buscaInterAbp(raiz->dir, idadeBusca, intervaloMin, intervaloMax, flag);
+}
 
 void inFix(Abp* Arv){
     if (Arv != NULL){
         inFix(Arv->esq);
-        printf("%ld  ", Arv->info);  // Usando item.cpf
+        printf("%ld  ", Arv->info);  
         inFix(Arv->dir);
     }
     return;
@@ -120,16 +148,18 @@ void insereValAbp(Abp* Arv, long long int val){
     return;
 }
 
+/*
 void popularAbpRand(Abp* Arv, int tam){
     if (Arv == NULL){ return; }
     for (int i = 0; i < tam; i++){
         long long int k;
         k = rand();
-        snprintf(k, sizeof(k), "Pessoa %d", i);  // Nome fictício
-        snprintf(k, sizeof(k), "pessoa%d@email.com", i);  // Email fictício
+        snprintf(k, sizeof(k), "Pessoa %ld", i);  // Nome fictício
+        snprintf(k, sizeof(k), "pessoa%ld@email.com", i);  // Email fictício
         insereValAbp(Arv, k);
     }
 }
+*/
 
 void liberarArvoreABP(Abp* raiz) {
     if (raiz != NULL) {
