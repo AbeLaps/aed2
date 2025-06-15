@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include "abp.h"
 
-#define tam 100
+#define tam 10000
 
 int posicaoInsert = 0;
 hashItem hashNULO = {NULL, 0, -1};
 
-int hashFunc(long int cpf) {
+int hashFunc(long long int cpf) {
     return (cpf * 10007) % tam;
 }
 
@@ -57,7 +57,7 @@ void popularSistema(FILE *arq, Abp *arv, hashItem hash[]){
     tipoItem item;
     int posArq = 0;
     while(fread(&item, sizeof(tipoItem), 1, arq)){
-        insereValAbp(arv, item);
+        insereValAbp(arv, item.cpf);
         inserirHash(hash, item, posArq);
         posArq++;
     }
