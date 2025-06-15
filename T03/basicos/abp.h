@@ -17,6 +17,8 @@ void posFix(Abp* Abp);
 void inFix(Abp* Abp);
 //int tamAbp(Abp* Abp);
 void insereValAbp(Abp* Arv, long long int val);
+int buscaAbp(Abp* arv, long long int chave);
+void buscaInterAbp(Abp *raiz, long long int idadeBusca, int intervaloMin, int intervaloMax, int flag);
 //void popularAbpRand(Abp* Abp, int tam);
 void liberarArvoreABP(Abp* raiz);
 //void coletaDadosAbp(Abp* Abp, tipoVetor *vetor, int *index);
