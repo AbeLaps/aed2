@@ -45,7 +45,6 @@ hashItem buscaHash(hashItem hash[], long int cpf) {
 
     // percorre a lista encadeada até encontrar o CPF ou chegar ao final
     while (aux.cpf != -1) {
-        printf("andando");
         if (aux.cpf == cpf) {
             return aux;
         }
