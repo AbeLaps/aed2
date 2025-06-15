@@ -35,6 +35,7 @@ void inserirHash(hashItem hash[], tipoItem item,int indArq) {
         novoItem.prox = &hash[ind];
         hash[ind] = novoItem;
     } else {
+        novoItem.prox = &hashNULO;
         hash[ind] = novoItem;  // caso contrário, simplesmente coloca na posição
     }
 }
@@ -45,6 +46,9 @@ hashItem buscaHash(hashItem hash[], long int cpf) {
 
     // percorre a lista encadeada até encontrar o CPF ou chegar ao final
     while (aux.cpf != -1) {
+        printf("andando");
+        printf("%ld\n",aux.prox);
+        printf("%d", &aux);
         if (aux.cpf == cpf) {
             return aux;
         }
@@ -57,8 +61,8 @@ void popularSistema(FILE *arq, Abp *arvCpf, Abp *arvIdade, hashItem hash[]){
     tipoItem item;
     int posArq = 0;
     while(fread(&item, sizeof(tipoItem), 1, arq)){
-        insereValAbp(arvCpf, item.cpf);
-        insereValAbp(arvIdade, item.idade);
+        insereValAbpCpf(arvCpf, item);
+        insereValAbpIdade(arvIdade, item);
         inserirHash(hash, item, posArq);
         posArq++;
     }
@@ -73,6 +77,7 @@ void buscaArq(FILE *arquivo, long long int idadeBusca, int intervaloMin, int int
     fseek(arquivo, 0, SEEK_SET);
 
     while (fread(&item, sizeof(tipoItem), 1, arquivo) == 1) {
+        //printf("%ld\n",item.cpf);
         // Verifica se a idade do item está no intervalo exclusivo (intervaloMin, intervaloMax)
         if (item.idade > intervaloMin && item.idade < intervaloMax) {
             int condicao = 0;
@@ -83,20 +88,20 @@ void buscaArq(FILE *arquivo, long long int idadeBusca, int intervaloMin, int int
                 case 3: condicao = (item.idade <= idadeBusca); break;
                 case 4: condicao = (item.idade >= idadeBusca); break;
                 default:
-                    printf("Flag inválida! Use 1 (<), 2 (>), 3 (<=), 4 (>=)\n");
+                    printf("Flag invalida! Use 1 (<), 2 (>), 3 (<=), 4 (>=)\n");
                     return;
             }
 
             if (condicao) {
                 encontrou = 1;
-                printf("CPF: %lld | Idade: %u | Agencia: %d | Nome: %s | Email: %s\n",
-                       item.cpf, item.idade, item.agencia, item.nome, item.email);
+                //printf("CPF: %lld | Idade: %u | Agencia: %d | Nome: %s | Email: %s\n",
+                       //item.cpf, item.idade, item.agencia, item.nome, item.email);
             }
         }
     }
 
     if (!encontrou) {
-        printf("Nenhum registro encontrado com os critérios especificados.\n");
+        printf("Nenhum registro encontrado com os criterios especificados.\n");
     }
 }
 
@@ -115,5 +120,6 @@ void buscaSeqArq(FILE *arquivo, long long int cpfBusca) {
         }
     }
 
-    printf("CPF %lld não encontrado.\n", cpfBusca);
+    printf("CPF %lld nao encontrado.\n", cpfBusca);
 }
+
