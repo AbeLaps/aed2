@@ -16,7 +16,7 @@ void preFix(Abp* Abp);
 void posFix(Abp* Abp);
 void inFix(Abp* Abp);
 //int tamAbp(Abp* Abp);
-void insereValAbpCpf(Abp* Arv, long long int val);
+void insereValAbp(Abp* Arv, long long int val);
 //void popularAbpRand(Abp* Abp, int tam);
 void liberarArvoreABP(Abp* raiz);
 //void coletaDadosAbp(Abp* Abp, tipoVetor *vetor, int *index);
