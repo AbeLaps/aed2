@@ -39,7 +39,7 @@ void posFix(Abp* Arv){
 }
 
 /*
-int buscaAbp(AbpCpf* arv, long long int chave) {
+int buscaAbp(Abp* arv, long long int chave) {
     AbpCpf* atual = arv;
     while (atual != NULL) {
         if (chave == atual->val) {
