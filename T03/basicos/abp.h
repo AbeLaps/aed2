@@ -4,21 +4,22 @@
 #include "vetor.h"  // Incluindo vetor.h, pois vamos usar a estrutura de vetor
 
 typedef struct Abp{
-    long long int info;
+    tipoItem item;
     struct Abp* esq;
     struct Abp* dir;
 } Abp;
 
 
-Abp* criaAbp(long long int);
+Abp* criaAbp(tipoItem item);
 void visita(Abp* Abp);
 void preFix(Abp* Abp);
 void posFix(Abp* Abp);
 void inFix(Abp* Abp);
 //int tamAbp(Abp* Abp);
-void insereValAbp(Abp* Arv, long long int val);
-int buscaAbp(Abp* arv, long long int chave);
-void buscaInterAbp(Abp *raiz, long long int idadeBusca, int intervaloMin, int intervaloMax, int flag);
+void insereValAbpIdade(Abp* Arv, tipoItem);
+void insereValAbpCpf(Abp* Arv, tipoItem);
+int buscaAbp(Abp* arv, tipoItem chave);
+void buscaInterAbp(Abp *raiz, tipoItem idadeBusca, int intervaloMin, int intervaloMax, int flag);
 //void popularAbpRand(Abp* Abp, int tam);
 void liberarArvoreABP(Abp* raiz);
 //void coletaDadosAbp(Abp* Abp, tipoVetor *vetor, int *index);
