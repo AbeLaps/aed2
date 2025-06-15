@@ -14,15 +14,15 @@ int main(){
     hashItem hash[10000];
     inicializaHash(hash);
     FILE * arquivo = fopen("C:/VScode/UFAM-codigos/AED-II-2025/T03/basicos/dados.bin", "rb");
-    Abp * arvCpf = criaAbpCpf(itemNULO);
-    Abp * arvIdade = criaAbpidade(itemNULO);
+    Abp * arvCpf = criaAbp(0);
+    Abp * arvIdade = criaAbp(0);
     popularSistema(arquivo,arvCpf, arvIdade, hash);
 
     long long int buscasCpf[30];
     long int rangeCpf = 100000;
     long long int inicioIntervaloCpf = 10000000000;
 
-    int buscasIdades[30];
+    long long int buscasIdades[30];
     int rangeIdade = 70;
     int inicioIntervaloIdade = 18;
 
@@ -58,14 +58,14 @@ int main(){
 
         switch (busca){
         case 1: // busca na abp
-            printf("Qual tipo de busca gostaria de realizar na abp? \n 1 para busca por atributo chave \n 2 para comparação de <, >, <= ou >= para tributo não chave\n");
+            printf("Qual tipo de busca gostaria de realizar na abp? \n 1 para busca por atributo chave \n 2 para comparacao de <, >, <= ou >= para atributo nao chave\n");
             scanf("%d", &busca2);
             switch (busca2)
             {
             case 1: //busca cpf na abp
                 for(int i = 0; i < 30; i++){
                     inicio = clock();
-                    //buscaCpfAbp(arv, buscasCpf[i]);
+                    buscaAbp(arvCpf, buscasCpf[i]);
                     fim = clock();
 
                     double tempoBusca = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
@@ -75,12 +75,21 @@ int main(){
                 mediaTempos = somaTempos/30;
                 break;
             
-            case 2: //busca idade na abp
+            case 2: //busca intervalo de idade na abp
+                printf("Em tipo de busca gostaria de realizar? \n 1 para < \n 2 para > \n 3 para <= \n 4 para >= \n");
+                scanf("%d", &flag);
+                int intervaloMin;
+                int intervaloMax;
+                printf("Qual o limite inicial: \n");
+                scanf("%d", &intervaloMin);
+                printf("Qual o limite final: \n");
+                scanf("%d", &intervaloMax);
+                
                 for(int i = 0; i < 30; i++){
                     inicio = clock();
-                    //buscaIdadeAbp(arv, buscasIdades[i]);
+                    buscaInterAbp(arvIdade, buscasIdades[i],intervaloMin,intervaloMax,flag);
                     fim = clock();
-
+            
                     double tempoBusca = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
                     tempos[i] = tempoBusca;
                     somaTempos += tempoBusca;
@@ -111,8 +120,8 @@ int main(){
             {
             case 1:
                 for(int i = 0; i < 30; i++){
-                    inicio = clock();
-                    buscaSeqArq(hash, buscasCpf[i]);
+                    inicio = clock();   
+                    buscaSeqArq(arquivo, buscasCpf[i]);
                     fim = clock();
 
                     double tempoBusca = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
@@ -123,18 +132,18 @@ int main(){
                 break;
             
             case 2:
-            printf("Em tipo de busca gostaria de realizar? \n 1 < \n 2 para > \n 3 para <= \n 4 para >= \n");
+            printf("Em tipo de busca gostaria de realizar? \n 1 para < \n 2 para > \n 3 para <= \n 4 para >= \n");
             scanf("%d", &flag);
             int intervaloMin;
             int intervaloMax;
-            printf("Qual o intervalo inicial: \n");
+            printf("Qual o limite inicial: \n");
             scanf("%d", &intervaloMin);
-            printf("Qual o intervalo final: \n");
+            printf("Qual o limite final: \n");
             scanf("%d", &intervaloMax);
             
             for(int i = 0; i < 30; i++){
                     inicio = clock();
-                    buscaArq(arquivo, buscasCpf[i],intervaloMin,intervaloMax,flag);
+                    buscaArq(arquivo, buscasIdades[i],intervaloMin,intervaloMax,flag);
                     fim = clock();
 
                     double tempoBusca = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
