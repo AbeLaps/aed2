@@ -6,17 +6,17 @@
 #include <time.h>
 #include "abp.h"
 
-Abp* criaAbp(long long int val){
+Abp* criaAbp(tipoItem val){
     Abp *Arv;
     Arv = (Abp * ) malloc(sizeof(Abp));
     Arv->esq = NULL;
     Arv->dir = NULL;
-    Arv->info = val;  
+    Arv->item = val;  
     return Arv;
 }
 
 void visita(Abp* Arv){
-    printf("%ld ", Arv->info);  
+    printf("%ld ", Arv->item);  
     return;
 }
 
@@ -39,13 +39,13 @@ void posFix(Abp* Arv){
 }
 
 
-int buscaAbp(Abp* arv, long long int chave) {
+int buscaAbp(Abp* arv, tipoItem chave) {
     Abp* atual = arv;
     while (atual != NULL) {
-        if (chave == atual->info) {
+        if (chave.cpf == atual->item.cpf) {
             return 1;  // encontrou
         }
-        else if (chave < atual->info) {
+        else if (chave.cpf < atual->item.cpf) {
             atual = atual->esq;
         }
         else {
@@ -55,28 +55,28 @@ int buscaAbp(Abp* arv, long long int chave) {
     return 0;  // nao encontrou
 }
 
-void buscaInterAbp(Abp *raiz, long long int idadeBusca, int intervaloMin, int intervaloMax, int flag) {
+void buscaInterAbp(Abp *raiz, tipoItem idadeBusca, int intervaloMin, int intervaloMax, int flag) {
     if (raiz == NULL) return;
 
     // Percorre a arvore esquerda
     buscaInterAbp(raiz->esq, idadeBusca, intervaloMin, intervaloMax, flag);
 
     // Verifica se está no intervalo
-    if (raiz->info > intervaloMin && raiz->info < intervaloMax) {
+    if (raiz->item.idade > intervaloMin && raiz->item.idade < intervaloMax) {
         int condicao = 0;
 
         switch (flag) {
-            case 1: condicao = (raiz->info < idadeBusca); break;
-            case 2: condicao = (raiz->info > idadeBusca); break;
-            case 3: condicao = (raiz->info <= idadeBusca); break;
-            case 4: condicao = (raiz->info >= idadeBusca); break;
+            case 1: condicao = (raiz->item.idade < idadeBusca.idade); break;
+            case 2: condicao = (raiz->item.idade > idadeBusca.idade); break;
+            case 3: condicao = (raiz->item.idade <= idadeBusca.idade); break;
+            case 4: condicao = (raiz->item.idade >= idadeBusca.idade); break;
             default:
                 printf("Flag inválida! Use 1 (<), 2 (>), 3 (<=), 4 (>=)\n");
                 return;
         }
 
         if (condicao) {
-            printf("Idade: %lld\n", raiz->info);
+            printf("Idade: %lld\n", raiz->item);
         }
     }
 
@@ -87,7 +87,7 @@ void buscaInterAbp(Abp *raiz, long long int idadeBusca, int intervaloMin, int in
 void inFix(Abp* Arv){
     if (Arv != NULL){
         inFix(Arv->esq);
-        printf("%ld  ", Arv->info);  
+        printf("%ld  ", Arv->item);  
         inFix(Arv->dir);
     }
     return;
@@ -126,10 +126,32 @@ int tamAbp(Abp* Arv){
     return(tamEsq);
 }
 
-void insereValAbp(Abp* Arv, long long int val){
+void insereValAbpIdade(Abp* Arv, tipoItem val){
     Abp* aux = Arv;
     while (aux != NULL){
-        if (aux->info < aux->info){  // Usando info
+        if (aux->item.idade < aux->item.idade){  // Usando item
+            if (aux->dir == NULL){
+                aux->dir = criaAbp(val);
+                return;
+            }
+            aux = aux->dir;
+        }
+        else{
+            if (aux->esq == NULL){
+                aux->esq = criaAbp(val);
+                return;
+            }
+            aux = aux->esq;
+        }
+    }
+    printf("erro: Arvore inserida == null");
+    return;
+}
+
+void insereValAbpCpf(Abp* Arv, tipoItem val){
+    Abp* aux = Arv;
+    while (aux != NULL){
+        if (aux->item.cpf < aux->item.cpf){  // Usando item
             if (aux->dir == NULL){
                 aux->dir = criaAbp(val);
                 return;
@@ -172,7 +194,7 @@ void liberarArvoreABP(Abp* raiz) {
 void coletaDadosAbp(Abp* Arv, tipoVetor *vetor, int *index) {
     if (Arv != NULL) {
         coletaDadosAbp(Arv->esq, vetor, index);
-        vetor->vet[*index] = Arv->info;  // Coleta a idade ou cpf
+        vetor->vet[*index] = Arv->item.cpf;  // Coleta a idade ou cpf
         (*index)++;
         coletaDadosAbp(Arv->dir, vetor, index);
     }
