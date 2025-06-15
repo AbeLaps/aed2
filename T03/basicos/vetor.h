@@ -7,7 +7,7 @@ typedef struct tipoVetor{
 }tipoVetor;
 
 typedef struct tipoItem {
-    long int cpf;
+    long long int cpf;
     unsigned int idade;
     int agencia;
     char nome[65];
