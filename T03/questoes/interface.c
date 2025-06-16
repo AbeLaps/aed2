@@ -2,8 +2,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
-//cpf variam de 10000000000 ate 10000100000 variacao de 100 mil para gerar 10 mil cpfs
+/*
+Integrantes do grupo:
+Abel Andrade Prazeres dos Santos
+Gabriela Silva Malveira
+Bruna de Souza Brasil
+Gabriel Gregório dos Santos Vitor
+*/
 
 tipoItem itemNULO = {-1, 0, 0, "x", "x"};
 
@@ -13,31 +20,41 @@ int main(){
     //popula o sistema completo
     hashItem hash[10000];
     inicializaHash(hash);
-    FILE * arquivo = fopen("C:/VScode/UFAM-codigos/AED-II-2025/T03/basicos/dados.bin", "rb");
-    Abp * arvCpf = criaAbp(0);
-    Abp * arvIdade = criaAbp(0);
+    FILE * arquivo = fopen("dadosv2.bin", "rb");
+    Abp * arvCpf = criaAbp(itemNULO);
+    Abp * arvIdade = criaAbp(itemNULO);
     popularSistema(arquivo,arvCpf, arvIdade, hash);
 
-    long long int buscasCpf[30];
-    long int rangeCpf = 100000;
-    long long int inicioIntervaloCpf = 10000000000;
+    int TOTAL = 10000;
+    long long int CPF_MIN = 10000000000LL;
+    long long int CPF_MAX = 10000025000LL;
+    int intervalo = CPF_MAX - CPF_MIN + 1;
 
-    long long int buscasIdades[30];
-    int rangeIdade = 70;
-    int inicioIntervaloIdade = 18;
+    tipoItem registros[TOTAL];
 
-    // gera vetor de 30 idades aleatorias
-    for (int i = 0; i < 30; i++) {
-        int r = rand() % rangeIdade;
-        buscasIdades[i] = inicioIntervaloIdade + r;
-        printf("Idade gerada %2d: %d\n", i + 1, buscasIdades[i]);
+    // Gera CPFs únicos
+    long long int *cpfs = malloc(intervalo * sizeof(long long int));
+    for (int i = 0; i < intervalo; i++) {
+        cpfs[i] = CPF_MIN + i;
+    }
+    for (int i = intervalo - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        long long int temp = cpfs[i];
+        cpfs[i] = cpfs[j];
+        cpfs[j] = temp;
     }
 
-    //gera vetor de 30 cpfs aleatorios
-    for (int i = 0; i < 30; i++) {
-        long long int r = rand() % rangeCpf;
-        buscasCpf[i] = inicioIntervaloCpf + r;
-        printf("Chave gerada %2d: %lld\n", i + 1, buscasCpf[i]);
+    // Preenche os registros
+    for (int i = 0; i < TOTAL; i++) {
+        registros[i].cpf = cpfs[i];
+        registros[i].idade = 18 + rand() % (90 - 18 + 1);
+        registros[i].agencia = 2 + rand() % (100 - 2 + 1);
+
+        memset(registros[i].nome, 'x', sizeof(registros[i].nome) - 1);
+        registros[i].nome[64] = '\0';
+
+        memset(registros[i].email, 'y', sizeof(registros[i].email) - 1);
+        registros[i].email[24] = '\0';
     }
 
     //flags para interface
@@ -65,7 +82,7 @@ int main(){
             case 1: //busca cpf na abp
                 for(int i = 0; i < 30; i++){
                     inicio = clock();
-                    buscaAbp(arvCpf, buscasCpf[i]);
+                    buscaAbp(arvCpf, registros[i]);
                     fim = clock();
 
                     double tempoBusca = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
@@ -78,16 +95,13 @@ int main(){
             case 2: //busca intervalo de idade na abp
                 printf("Em tipo de busca gostaria de realizar? \n 1 para < \n 2 para > \n 3 para <= \n 4 para >= \n");
                 scanf("%d", &flag);
-                int intervaloMin;
-                int intervaloMax;
-                printf("Qual o limite inicial: \n");
-                scanf("%d", &intervaloMin);
-                printf("Qual o limite final: \n");
-                scanf("%d", &intervaloMax);
+                int intervalo;
+                printf("Insira o numero a ser comparado: \n");
+                scanf("%d", &intervalo);
                 
                 for(int i = 0; i < 30; i++){
                     inicio = clock();
-                    buscaInterAbp(arvIdade, buscasIdades[i],intervaloMin,intervaloMax,flag);
+                    buscaInterAbp(arvIdade, intervalo, flag);
                     fim = clock();
             
                     double tempoBusca = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
@@ -103,7 +117,7 @@ int main(){
         case 2: //hash
             for(int i = 0; i < 30; i++){
                     inicio = clock();
-                    buscaHash(hash, buscasCpf[i]);
+                    buscaHash(hash, registros[i].cpf);
                     fim = clock();
 
                     double tempoBusca = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
@@ -114,14 +128,14 @@ int main(){
             break;
         
         case 3: //arquivo
-            printf("Em tipo de busca gostaria de realizar? \n 1 para busca por atributo chave \n 2 para comparacao de <, >, <= ou >= para atributo nao chave");
+            printf("Em tipo de busca gostaria de realizar? \n 1 para busca por atributo chave \n 2 para comparacao de <, >, <= ou >= para atributo nao chave\n");
             scanf("%d", &busca2);
             switch (busca2)
             {
             case 1:
-                for(int i = 0; i < 30; i++){
+                for(int i = 0; i < 30; i++){    
                     inicio = clock();   
-                    buscaSeqArq(arquivo, buscasCpf[i]);
+                    buscaSeqArq(arquivo, registros[i].cpf);
                     fim = clock();
 
                     double tempoBusca = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
@@ -132,18 +146,16 @@ int main(){
                 break;
             
             case 2:
-            printf("Em tipo de busca gostaria de realizar? \n 1 para < \n 2 para > \n 3 para <= \n 4 para >= \n");
+            printf("Em tipo de busca gostaria de realizar? \n 1 para idade < limite \n 2 para idade > limite \n 3 para idade <= limite \n 4 para idade >= limite \n");
             scanf("%d", &flag);
             int intervaloMin;
             int intervaloMax;
-            printf("Qual o limite inicial: \n");
-            scanf("%d", &intervaloMin);
-            printf("Qual o limite final: \n");
-            scanf("%d", &intervaloMax);
+            printf("Insira o numero a ser comparado: \n");
+            scanf("%d", &intervalo);
             
             for(int i = 0; i < 30; i++){
                     inicio = clock();
-                    buscaArq(arquivo, buscasIdades[i],intervaloMin,intervaloMax,flag);
+                    buscaArq(arquivo, intervalo,flag);
                     fim = clock();
 
                     double tempoBusca = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
@@ -151,6 +163,9 @@ int main(){
                     somaTempos += tempoBusca;
                 }
                 mediaTempos = somaTempos/30;
+                break;
+            default:
+                printf("entrada invalida");
                 break;
             }
             
@@ -161,12 +176,12 @@ int main(){
         printf("--------------------------------------------------------------\n");
 
         for (int i = 0; i < 30; i++) {
-            printf("| %7.3lf ", tempos[i]); 
+            printf("| %7.6lf ", tempos[i] * 1000); 
             if ((i + 1) % 5 == 0)
                 printf("|\n");
         }
         printf("--------------------------------------------------------------\n");
-        printf("| Média dos tempos: %7.3lf                                  |\n", mediaTempos);
+        printf("| Media dos tempos: %7.4lf                                  |\n", mediaTempos * 1000);
         printf("--------------------------------------------------------------\n");
         }
 }
