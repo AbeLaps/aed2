@@ -6,6 +6,14 @@
 #include <time.h>
 #include "abp.h"
 
+/*
+Integrantes do grupo:
+Abel Andrade Prazeres dos Santos
+Gabriela Silva Malveira
+Bruna de Souza Brasil
+Gabriel Gregório dos Santos Vitor
+*/
+
 Abp* criaAbp(tipoItem val){
     Abp *Arv;
     Arv = (Abp * ) malloc(sizeof(Abp));
@@ -15,35 +23,12 @@ Abp* criaAbp(tipoItem val){
     return Arv;
 }
 
-void visita(Abp* Arv){
-    printf("%ld ", Arv->item);  
-    return;
-}
-
-void preFix(Abp* Arv){
-    if (Arv != NULL){
-        visita(Arv);
-        preFix(Arv->esq);
-        preFix(Arv->dir);
-    }
-    return;
-}
-
-void posFix(Abp* Arv){
-    if (Arv != NULL){
-        posFix(Arv->esq);
-        posFix(Arv->dir);
-        visita(Arv);
-    }
-    return;
-}
-
-
 int buscaAbp(Abp* arv, tipoItem chave) {
     Abp* atual = arv;
     while (atual != NULL) {
         if (chave.cpf == atual->item.cpf) {
-            return 1;  // encontrou
+            printf("Registro encontrado: CPF = %lld\n", chave.cpf);
+            return 1;
         }
         else if (chave.cpf < atual->item.cpf) {
             atual = atual->esq;
@@ -52,136 +37,78 @@ int buscaAbp(Abp* arv, tipoItem chave) {
             atual = atual->dir;
         }
     }
-    return 0;  // nao encontrou
+    printf("Registro com CPF = %lld nao encontrado.\n", chave.cpf);
+    return 0;
 }
 
-void buscaInterAbp(Abp *raiz, tipoItem idadeBusca, int intervaloMin, int intervaloMax, int flag) {
-    if (raiz == NULL) return;
+void buscaInterAbp(Abp* raiz, int idadeBase, int flag){
+    if (raiz == NULL) return ;
 
-    // Percorre a arvore esquerda
-    buscaInterAbp(raiz->esq, idadeBusca, intervaloMin, intervaloMax, flag);
+    // Percorre subarvore esquerda
+    buscaInterAbp(raiz->esq, idadeBase, flag);
 
-    // Verifica se está no intervalo
-    if (raiz->item.idade > intervaloMin && raiz->item.idade < intervaloMax) {
-        int condicao = 0;
-
-        switch (flag) {
-            case 1: condicao = (raiz->item.idade < idadeBusca.idade); break;
-            case 2: condicao = (raiz->item.idade > idadeBusca.idade); break;
-            case 3: condicao = (raiz->item.idade <= idadeBusca.idade); break;
-            case 4: condicao = (raiz->item.idade >= idadeBusca.idade); break;
-            default:
-                printf("Flag inválida! Use 1 (<), 2 (>), 3 (<=), 4 (>=)\n");
-                return;
-        }
-
-        if (condicao) {
-            printf("Idade: %lld\n", raiz->item);
-        }
+    // Verifica a condicao baseada na flag
+    int condicao = 0;
+    switch (flag){
+        case 1: condicao = (raiz->item.idade < idadeBase); break;
+        case 2: condicao = (raiz->item.idade > idadeBase); break;
+        case 3: condicao = (raiz->item.idade <= idadeBase); break;
+        case 4: condicao = (raiz->item.idade >= idadeBase); break;
+        default:
+            printf("Flag invalida! Use 1 (<), 2 (>), 3 (<=), 4 (>=)\n");
+            return;
     }
 
-    // Percorre arvore direita
-    buscaInterAbp(raiz->dir, idadeBusca, intervaloMin, intervaloMax, flag);
+    /*if (condicao){ //comentado para nao inflar o tempo
+        printf("Registro encontrado:\n");
+        printf("CPF: %lld | Idade: %u | Agencia: %d | Nome: %s | Email: %s\n",
+               raiz->item.cpf, raiz->item.idade, raiz->item.agencia, raiz->item.nome, raiz->item.email);
+    }
+    */
+
+    // Percorre subarvore direita
+    buscaInterAbp(raiz->dir, idadeBase, flag);
 }
 
-void inFix(Abp* Arv){
-    if (Arv != NULL){
-        inFix(Arv->esq);
-        printf("%ld  ", Arv->item);  
-        inFix(Arv->dir);
-    }
-    return;
-}
-
-int auxTam(Abp* Arv, int tam){
-    int tamDir = 0, tamEsq = tam;
-    if (Arv->dir != NULL){
-        tamDir += 1;
-        tamDir = auxTam(Arv->dir, tamDir);
-    }
-    if (Arv->esq != NULL){
-        tamEsq += 1;
-        tamEsq = auxTam(Arv->esq, tamEsq);
-    }
-    if (tamDir > tamEsq){
-        return(tamDir);
-    }
-    else{
-        return(tamEsq);
-    }
-}
-
-int tamAbp(Abp* Arv){
-    if (Arv == NULL){
-        return(-1);
-    }    
-    int tamEsq, tamDir = 0;
-    Abp * auxDir = Arv->dir; 
-    Abp * auxEsq = Arv->esq;
-    tamDir = auxTam(auxDir, tamDir);
-    tamEsq = auxTam(auxEsq, tamEsq);
-    if (tamDir > tamEsq){
-        return(tamDir);
-    }
-    return(tamEsq);
-}
-
-void insereValAbpIdade(Abp* Arv, tipoItem val){
+void insereValAbpIdade(Abp* Arv, tipoItem val) {
     Abp* aux = Arv;
-    while (aux != NULL){
-        if (aux->item.idade < aux->item.idade){  // Usando item
-            if (aux->dir == NULL){
+    while (aux != NULL) {
+        if (val.idade < aux->item.idade) {
+            if (aux->esq == NULL) {
+                aux->esq = criaAbp(val);
+                return;
+            }
+            aux = aux->esq;
+        } else {
+            if (aux->dir == NULL) {
                 aux->dir = criaAbp(val);
                 return;
             }
             aux = aux->dir;
         }
-        else{
-            if (aux->esq == NULL){
+    }
+    printf("Erro: Árvore raiz == NULL\n");
+}
+
+void insereValAbpCpf(Abp* Arv, tipoItem val) {
+    Abp* aux = Arv;
+    while (aux != NULL) {
+        if (val.cpf < aux->item.cpf) {
+            if (aux->esq == NULL) {
                 aux->esq = criaAbp(val);
                 return;
             }
             aux = aux->esq;
-        }
-    }
-    printf("erro: Arvore inserida == null");
-    return;
-}
-
-void insereValAbpCpf(Abp* Arv, tipoItem val){
-    Abp* aux = Arv;
-    while (aux != NULL){
-        if (aux->item.cpf < aux->item.cpf){  // Usando item
-            if (aux->dir == NULL){
+        } else {
+            if (aux->dir == NULL) {
                 aux->dir = criaAbp(val);
                 return;
             }
             aux = aux->dir;
         }
-        else{
-            if (aux->esq == NULL){
-                aux->esq = criaAbp(val);
-                return;
-            }
-            aux = aux->esq;
-        }
     }
-    printf("erro: Arvore inserida == null");
-    return;
+    printf("Erro: Arvore raiz == NULL\n");
 }
-
-/*
-void popularAbpRand(Abp* Arv, int tam){
-    if (Arv == NULL){ return; }
-    for (int i = 0; i < tam; i++){
-        long long int k;
-        k = rand();
-        snprintf(k, sizeof(k), "Pessoa %ld", i);  // Nome fictício
-        snprintf(k, sizeof(k), "pessoa%ld@email.com", i);  // Email fictício
-        insereValAbp(Arv, k);
-    }
-}
-*/
 
 void liberarArvoreABP(Abp* raiz) {
     if (raiz != NULL) {
@@ -191,6 +118,7 @@ void liberarArvoreABP(Abp* raiz) {
     }
 }
 
+/*
 void coletaDadosAbp(Abp* Arv, tipoVetor *vetor, int *index) {
     if (Arv != NULL) {
         coletaDadosAbp(Arv->esq, vetor, index);
@@ -199,7 +127,8 @@ void coletaDadosAbp(Abp* Arv, tipoVetor *vetor, int *index) {
         coletaDadosAbp(Arv->dir, vetor, index);
     }
 }
-/*
+
+
 void calcularEstatisticas(Abp* Arv, tipoVetor *vetor) {
     int index = 0;
     coletaDadosAbp(Arv, vetor, &index);
