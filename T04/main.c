@@ -17,7 +17,6 @@ void executarQuestao1() {
         liberarGrafo(g); 
     }
 }
-
 void executarQuestao2();
 
 void executarQuestao3(){
@@ -41,6 +40,8 @@ void executarQuestao3(){
 
 
 
+void executarQuestao4();
+void executarQuestao5();
 void executarQuestao4();
 void executarQuestao5();
 
