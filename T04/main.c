@@ -3,8 +3,7 @@
 #include <time.h>
 #include "grafo.h"
 #include "util.h"
-#include "dfs.h"
-#include "bfs.h"
+
 
 void executarQuestao1() {
     int numVertices = 10;
@@ -19,7 +18,7 @@ void executarQuestao1() {
     }
 }
 
-// void executarQuestao2();
+void executarQuestao2();
 
 void executarQuestao3(){
     int numVertices = 100;
@@ -42,8 +41,8 @@ void executarQuestao3(){
 
 
 
-// void executarQuestao4();
-// void executarQuestao5();
+void executarQuestao4();
+void executarQuestao5();
 
 int main() {
     srand(time(NULL));
@@ -62,19 +61,19 @@ int main() {
 
         switch (opcao) {
             case 1:
-                //executarQuestao1();
+                executarQuestao1();
                 break;
             case 2:
-                //executarQuestao2();
+                executarQuestao2();
                 break;
             case 3:
                 executarQuestao3();
                 break;
             case 4:
-                //executarQuestao4();
+                executarQuestao4();
                 break;
             case 5:
-                //executarQuestao5();
+                executarQuestao5();
                 break;
             case 0:
                 printf("Encerrando o programa...\n");
