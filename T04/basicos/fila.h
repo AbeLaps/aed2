@@ -17,6 +17,6 @@ int estaVazia(Fila* f);
 
 void enfileirar(Fila* f, int valor);
 
-void enfileirar(Fila* f, int valor);
+int desenfileirar(Fila* f);
 
 #endif

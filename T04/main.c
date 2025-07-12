@@ -5,6 +5,13 @@
 #include "util.h"
 
 
+void imprimirArvoreBusca(int* pai, int n) {
+    printf("Árvore de busca (formato filho -> pai):\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d -> %d\n", i, pai[i]);
+    }
+}
+
 void executarQuestao1() {
     int numVertices = 10;
     float conectividades[] = {0.25, 0.5, 0.75, 1.0};
@@ -18,7 +25,29 @@ void executarQuestao1() {
     }
 }
 
-void executarQuestao2();
+void executarQuestao2() {
+    int numVertices = 100;
+    float conectividades[] = {0.25, 0.5, 0.75, 1.0};
+    clock_t inicio, fim;
+    double tempo;
+
+    for (int i = 0; i < 4; i++) {
+        printf("\n--- BFS com conectividade %.0f%% ---\n", conectividades[i]*100);
+        Grafo* g = criarGrafo(numVertices);
+        gerarGrafoConexo(g, conectividades[i]);
+
+        int pai[MAX_VERTICES];
+        inicio = clock();
+        bfs(g, 0, pai);
+        fim = clock();
+
+        tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+        printf("Tempo de execução: %.4f s\n", tempo);
+        imprimirArvoreBusca(pai, numVertices);
+
+        liberarGrafo(g);
+    }
+}
 
 void executarQuestao3(){
     int numVertices = 100;
@@ -26,7 +55,7 @@ void executarQuestao3(){
     clock_t inicio, final;
     double tempo;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 4; i++) { //so tem 4 conectividades
         printf("\n--- Grafo com conectividade %.0f%% ---\n", conectividades[i]*100);
         Grafo* g = criarGrafo(numVertices);
         gerarGrafoConexo(g, conectividades[i]);
@@ -41,8 +70,6 @@ void executarQuestao3(){
 
 
 
-void executarQuestao4();
-void executarQuestao5();
 void executarQuestao4();
 void executarQuestao5();
 
