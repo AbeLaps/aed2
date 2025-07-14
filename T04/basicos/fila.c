@@ -17,7 +17,7 @@ void enfileirar(Fila* f, int valor) {
     }
 }
 
-void desenfileirar(Fila* f, int valor) {
+void desenfileirar(Fila* f) {
     if (!estaVazia(f)) {
         return f->itens[(f->frente)++];
     }
