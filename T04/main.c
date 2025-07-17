@@ -4,12 +4,70 @@
 #include "grafo.h"
 #include "util.h"
 
+void buscarTodosCaminhos(Grafo* grafo, int atual, int* visitado, int* caminho, int profundidade) {
+    visitado[atual] = 1;
+    caminho[profundidade] = atual;
+
+    if (profundidade == grafo->numVertices - 1) {
+        // Caminho completo
+        for (int i = 0; i < grafo->numVertices; i++) {
+            printf("%d ", caminho[i]);
+        }
+        printf("\n");
+    } else {
+        No* adj = grafo->listaAdj[atual];
+        while (adj != NULL) {
+            int vizinho = adj->vertice;
+            if (!visitado[vizinho]) {
+                buscarTodosCaminhos(grafo, vizinho, visitado, caminho, profundidade + 1);
+            }
+            adj = adj->prox;
+        }
+    }
+
+    visitado[atual] = 0; // backtrack
+}
 
 void imprimirArvoreBusca(int* pai, int n) {
     printf("Árvore de busca (formato filho -> pai):\n");
     for (int i = 0; i < n; i++) {
         printf("%d -> %d\n", i, pai[i]);
     }
+}
+
+int temCicloAux(Grafo* grafo, int atual, int* visitado, int pai) {
+    visitado[atual] = 1;
+
+    No* adj = grafo->listaAdj[atual];
+    while (adj != NULL) {
+        int vizinho = adj->vertice;
+
+        if (!visitado[vizinho]) {
+            if (temCicloAux(grafo, vizinho, visitado, atual)) {
+                return 1;
+            }
+        } else if (vizinho != pai) {
+            return 1; // ciclo detectado
+        }
+
+        adj = adj->prox;
+    }
+
+    return 0;
+}
+
+int temCiclo(Grafo* grafo) {
+    int visitado[MAX_VERTICES] = {0};
+
+    for (int i = 0; i < grafo->numVertices; i++) {
+        if (!visitado[i]) {
+            if (temCicloAux(grafo, i, visitado, -1)) {
+                return 1;
+            }
+        }
+    }
+
+    return 0;
 }
 
 void executarQuestao1() {
@@ -68,10 +126,40 @@ void executarQuestao3(){
     }
 }
 
+void executarQuestao4() {
+    int numVertices = 6; // evitar explosão combinatória
+    Grafo* grafo = criarGrafo(numVertices);
+    gerarGrafoConexo(grafo, 1.0); // total para garantir conectividade
 
+    printf("\nTodos os caminhos DFS que visitam todos os vértices:\n");
 
-void executarQuestao4();
-void executarQuestao5();
+    int visitado[MAX_VERTICES] = {0};
+    int caminho[MAX_VERTICES];
+
+    buscarTodosCaminhos(grafo, 0, visitado, caminho, 0);
+
+    liberarGrafo(grafo);
+}
+
+void executarQuestao5() {
+    int numVertices = 10;
+    float conectividades[] = {0.25, 0.5, 0.75, 1.0};
+
+    for (int i = 0; i < 4; i++) {
+        printf("\n--- Grafo com conectividade %.0f%% ---\n", conectividades[i]*100);
+        Grafo* g = criarGrafo(numVertices);
+        gerarGrafoConexo(g, conectividades[i]);
+        imprimirGrafo(g);
+
+        if (temCiclo(g)) {
+            printf("→ O grafo possui ciclo.\n");
+        } else {
+            printf("→ O grafo NÃO possui ciclo.\n");
+        }
+
+        liberarGrafo(g);
+    }
+}
 
 int main() {
     srand(time(NULL));
