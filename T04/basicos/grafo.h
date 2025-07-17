@@ -16,9 +16,9 @@ typedef struct {
 
 Grafo* criarGrafo(int numVertices);
 
-void buscarTodosCaminhos(Grafo* grafo, int atual, int* visitado, int* caminho, int profundidade);
+void buscarTodosCaminhosPorDFS(Grafo* grafo, int atual, int* visitado, int* caminho, int profundidade);
 
-int temCiclo(Grafo* grafo);
+int temCicloPorDFS(Grafo* grafo);
 
 void dfs(Grafo* grafo);
 

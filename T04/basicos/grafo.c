@@ -154,7 +154,7 @@ int temCicloAux(Grafo* grafo, int atual, int* visitado, int pai) {
     return 0;
 }
 
-int temCiclo(Grafo* grafo) {
+int temCicloPorDFS(Grafo* grafo) {
     int visitado[MAX_VERTICES] = {0};
 
     for (int i = 0; i < grafo->numVertices; i++) {
@@ -168,7 +168,7 @@ int temCiclo(Grafo* grafo) {
     return 0;
 }
 
-void buscarTodosCaminhos(Grafo* grafo, int atual, int* visitado, int* caminho, int profundidade) {
+void buscarTodosCaminhosPorDFS(Grafo* grafo, int atual, int* visitado, int* caminho, int profundidade) {
     visitado[atual] = 1;
     caminho[profundidade] = atual;
 
@@ -183,7 +183,7 @@ void buscarTodosCaminhos(Grafo* grafo, int atual, int* visitado, int* caminho, i
         while (adj != NULL) {
             int vizinho = adj->vertice;
             if (!visitado[vizinho]) {
-                buscarTodosCaminhos(grafo, vizinho, visitado, caminho, profundidade + 1);
+                buscarTodosCaminhosPorDFS(grafo, vizinho, visitado, caminho, profundidade + 1);
             }
             adj = adj->prox;
         }
