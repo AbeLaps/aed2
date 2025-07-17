@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "grafo.h"
-#include "util.h"
+
 
 void buscarTodosCaminhos(Grafo* grafo, int atual, int* visitado, int* caminho, int profundidade) {
     visitado[atual] = 1;
