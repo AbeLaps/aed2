@@ -85,19 +85,20 @@ void executarQuestao4() {
 }
 
 void executarQuestao5() {
-    int numVertices = 10;
+    int numVertices[] = {5, 10, 20, 30};
+
     float conectividades[] = {0.25, 0.5, 0.75, 1.0};
 
     for (int i = 0; i < 4; i++) {
         printf("\n--- Grafo com conectividade %.0f%% ---\n", conectividades[i]*100);
-        Grafo* g = criarGrafo(numVertices);
+        Grafo* g = criarGrafo(numVertices[i]);
         gerarGrafoConexo(g, conectividades[i]);
         imprimirGrafo(g);
 
         if (temCicloPorDFS(g)) {
-            printf("→ O grafo possui ciclo.\n");
+            printf("-> O grafo possui ciclo.\n");
         } else {
-            printf("→ O grafo NAO possui ciclo.\n");
+            printf("-> O grafo NAO possui ciclo.\n");
         }
 
         liberarGrafo(g);
