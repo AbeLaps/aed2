@@ -86,13 +86,15 @@ void executarQuestao4() {
 
 void executarQuestao5() {
     int numVertices[] = {5, 10, 20, 30};
-
+    int num1, num2;
     float conectividades[] = {0.25, 0.5, 0.75, 1.0};
 
     for (int i = 0; i < 4; i++) {
-        printf("\n--- Grafo com conectividade %.0f%% ---\n", conectividades[i]*100);
-        Grafo* g = criarGrafo(numVertices[i]);
-        gerarGrafoConexo(g, conectividades[i]);
+        num1 = rand() % 4;
+        num2 = rand() % 4;
+        printf("\n--- Grafo com conectividade %.0f%% e %d vertices ---\n", conectividades[num2]*100, numVertices[num1]);
+        Grafo* g = criarGrafo(numVertices[num1]);
+        gerarGrafoConexo(g, conectividades[num2]);
         imprimirGrafo(g);
 
         if (temCicloPorDFS(g)) {
