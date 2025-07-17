@@ -4,71 +4,14 @@
 #include "grafo.h"
 
 
-void buscarTodosCaminhos(Grafo* grafo, int atual, int* visitado, int* caminho, int profundidade) {
-    visitado[atual] = 1;
-    caminho[profundidade] = atual;
-
-    if (profundidade == grafo->numVertices - 1) {
-        // Caminho completo
-        for (int i = 0; i < grafo->numVertices; i++) {
-            printf("%d ", caminho[i]);
-        }
-        printf("\n");
-    } else {
-        No* adj = grafo->listaAdj[atual];
-        while (adj != NULL) {
-            int vizinho = adj->vertice;
-            if (!visitado[vizinho]) {
-                buscarTodosCaminhos(grafo, vizinho, visitado, caminho, profundidade + 1);
-            }
-            adj = adj->prox;
-        }
-    }
-
-    visitado[atual] = 0; // backtrack
-}
-
 void imprimirArvoreBusca(int* pai, int n) {
-    printf("Árvore de busca (formato filho -> pai):\n");
+    printf("Arvore de busca (formato filho -> pai):\n");
     for (int i = 0; i < n; i++) {
         printf("%d -> %d\n", i, pai[i]);
     }
 }
 
-int temCicloAux(Grafo* grafo, int atual, int* visitado, int pai) {
-    visitado[atual] = 1;
 
-    No* adj = grafo->listaAdj[atual];
-    while (adj != NULL) {
-        int vizinho = adj->vertice;
-
-        if (!visitado[vizinho]) {
-            if (temCicloAux(grafo, vizinho, visitado, atual)) {
-                return 1;
-            }
-        } else if (vizinho != pai) {
-            return 1; // ciclo detectado
-        }
-
-        adj = adj->prox;
-    }
-
-    return 0;
-}
-
-int temCiclo(Grafo* grafo) {
-    int visitado[MAX_VERTICES] = {0};
-
-    for (int i = 0; i < grafo->numVertices; i++) {
-        if (!visitado[i]) {
-            if (temCicloAux(grafo, i, visitado, -1)) {
-                return 1;
-            }
-        }
-    }
-
-    return 0;
-}
 
 void executarQuestao1() {
     int numVertices = 10;
@@ -100,7 +43,7 @@ void executarQuestao2() {
         fim = clock();
 
         tempo = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
-        printf("Tempo de execução: %.4f s\n", tempo);
+        printf("Tempo de execucao: %.4f s\n", tempo);
         imprimirArvoreBusca(pai, numVertices);
 
         liberarGrafo(g);
@@ -120,8 +63,8 @@ void executarQuestao3(){
         inicio = clock();
         dfs(g);
         final = clock();
-        tempo = ((double) (final - inicio)) / CLOCKS_PER_SEC;
-        printf("tempo para realizar DFS: %ld\n", tempo);
+        tempo = ((double)(final - inicio)) / CLOCKS_PER_SEC;
+        printf("tempo para realizar DFS: %.4f\n", tempo);
         liberarGrafo(g);    
     }
 }
@@ -129,14 +72,14 @@ void executarQuestao3(){
 void executarQuestao4() {
     int numVertices = 6; // evitar explosão combinatória
     Grafo* grafo = criarGrafo(numVertices);
-    gerarGrafoConexo(grafo, 1.0); // total para garantir conectividade
+    gerarGrafoConexo(grafo, 1.0); // total para garantir conectividade maxima
 
-    printf("\nTodos os caminhos DFS que visitam todos os vértices:\n");
+    printf("\nTodos os caminhos DFS que visitam todos os vertices:\n");
 
     int visitado[MAX_VERTICES] = {0};
     int caminho[MAX_VERTICES];
 
-    buscarTodosCaminhos(grafo, 0, visitado, caminho, 0);
+    buscarTodosCaminhosPorDFS(grafo, 0, visitado, caminho, 0);
 
     liberarGrafo(grafo);
 }
@@ -151,10 +94,10 @@ void executarQuestao5() {
         gerarGrafoConexo(g, conectividades[i]);
         imprimirGrafo(g);
 
-        if (temCiclo(g)) {
+        if (temCicloPorDFS(g)) {
             printf("→ O grafo possui ciclo.\n");
         } else {
-            printf("→ O grafo NÃO possui ciclo.\n");
+            printf("→ O grafo NAO possui ciclo.\n");
         }
 
         liberarGrafo(g);
@@ -166,14 +109,14 @@ int main() {
     int opcao;
 
     do {
-        printf("\n=== Menu de Execução ===\n");
+        printf("\n=== Menu de Execucao ===\n");
         printf("1. Criar grafos conexos com diferentes conectividades\n");
         printf("2. Busca em Largura (BFS)\n");
         printf("3. Busca em Profundidade (DFS)\n");
         printf("4. Todos os caminhos DFS\n");
-        printf("5. Detecção de ciclos (DFS)\n");
+        printf("5. Deteccao de ciclos (DFS)\n");
         printf("0. Sair\n");
-        printf("Escolha uma opção: ");
+        printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
