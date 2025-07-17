@@ -15,10 +15,21 @@ typedef struct {
 } Grafo;
 
 Grafo* criarGrafo(int numVertices);
+
+void buscarTodosCaminhos(Grafo* grafo, int atual, int* visitado, int* caminho, int profundidade);
+
+int temCiclo(Grafo* grafo);
+
+void dfs(Grafo* grafo);
+
+void bfs(Grafo* grafo, int inicio, int* pai);
+
 void adicionarAresta(Grafo* grafo, int v1, int v2);
+
+void gerarGrafoConexo(Grafo* grafo, float conectividade);
+
 void liberarGrafo(Grafo* grafo);
+
 void imprimirGrafo(Grafo* grafo);
-void transfomaEmGrafoConexo(Grafo * grafo);
-void ajustaConectividade(Grafo * grafo, float con);
 
 #endif
